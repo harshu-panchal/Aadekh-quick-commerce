@@ -175,12 +175,39 @@ export default function Home() {
       {/* Promo Strip */}
       <PromoStrip activeTab={activeTab} />
 
-      {/* Dynamic Banners Carousel */}
-      {activeTab === "all" &&
-        homeData.promoBanners &&
-        homeData.promoBanners.length > 0 && (
-          <HomeBannerCarousel banners={homeData.promoBanners} />
-        )}
+      {/* Static Banners Carousel */}
+      <HomeBannerCarousel
+        banners={[
+          {
+            _id: "1",
+            title: "Banner 1",
+            image: "/assets/banners/banner1.jpg",
+            link: "/category/all",
+            order: 1,
+          },
+          {
+            _id: "2",
+            title: "Banner 2",
+            image: "/assets/banners/banner2.jpg",
+            link: "/category/all",
+            order: 2,
+          },
+          {
+            _id: "3",
+            title: "Banner 3",
+            image: "/assets/banners/banner3.jpg",
+            link: "/category/all",
+            order: 3,
+          },
+          {
+            _id: "4",
+            title: "Banner 4",
+            image: "/assets/banners/banner4.jpg",
+            link: "/category/all",
+            order: 4,
+          },
+        ]}
+      />
 
       {/* LOWEST PRICES EVER Section */}
       <LowestPricesEver

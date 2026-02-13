@@ -187,7 +187,7 @@ export default function SellerSignUp() {
         } catch (otpErr: any) {
           setError(
             otpErr.response?.data?.message ||
-              "Registration successful but failed to send OTP."
+            "Registration successful but failed to send OTP."
           );
         }
       }
@@ -230,11 +230,16 @@ export default function SellerSignUp() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 to-green-50 flex flex-col items-center justify-center px-4 py-8">
+    <div className="min-h-screen relative flex flex-col items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-[#0f2e20] via-[#1a4a33] to-[#0c831f]">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-green-500/20 blur-[100px] animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-teal-400/20 blur-[120px] animate-pulse delay-700" />
+      <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] rounded-full bg-emerald-400/10 blur-[80px]" />
+
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-neutral-50 transition-colors"
+        className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-95"
         aria-label="Back">
         <svg
           width="20"
@@ -252,32 +257,35 @@ export default function SellerSignUp() {
         </svg>
       </button>
 
-      {/* Sign Up Card */}
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
+      {/* Glassmorphism Card */}
+      <div className="w-full max-w-md relative z-10 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] overflow-hidden animate-fade-in-up">
         {/* Header Section */}
-        <div
-          className="px-6 py-4 text-center border-b border-green-700"
-          style={{
-            backgroundColor: "rgb(21 178 74 / var(--tw-bg-opacity, 1))",
-          }}>
-          <div className="mb-0 -mt-4">
-            <img
-              src="/assets/kosil1.png"
-              alt="Kosil"
-              className="h-44 w-full max-w-xs mx-auto object-fill object-bottom"
-            />
+        <div className="p-6 relative text-center">
+          <div className="flex flex-col items-center mb-2">
+            <div className="relative mb-2 group">
+              <div className="absolute inset-0 bg-white/20 rounded-full blur-xl transform group-hover:scale-110 transition-transform duration-500" />
+              <img
+                src="/assets/aadekh_logo-removebg-preview.png"
+                alt="Aadekh"
+                className="h-40 w-auto object-contain relative z-10 drop-shadow-lg transform hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            {!showOTP && (
+              <div className="space-y-0.5">
+                <h1 className="text-xl font-bold text-white tracking-tight">
+                  Seller Sign Up
+                </h1>
+                <p className="text-green-100/80 text-xs font-medium">
+                  Create your seller account
+                </p>
+              </div>
+            )}
           </div>
-          <h1 className="text-2xl font-bold text-white mb-1 -mt-12">
-            Seller Sign Up
-          </h1>
-          <p className="text-green-50 text-sm -mt-2">
-            Create your seller account
-          </p>
         </div>
 
         {/* Sign Up Form */}
         <div
-          className="p-6 space-y-4 seller-signup-form"
+          className="px-6 pb-6 space-y-4 seller-signup-form"
           style={{
             maxHeight: "70vh",
             overflowY: "auto",
@@ -293,13 +301,13 @@ export default function SellerSignUp() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Required Fields Section */}
               <div className="space-y-4">
-                <h3 className="text-sm font-semibold text-neutral-700 border-b pb-2">
+                <h3 className="text-sm font-semibold text-white/90 border-b border-white/20 pb-2">
                   Required Information
                 </h3>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Seller Name <span className="text-red-500">*</span>
+                  <label className="block text-xs font-medium text-white/80 mb-1.5">
+                    Seller Name <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -308,17 +316,17 @@ export default function SellerSignUp() {
                     onChange={handleInputChange}
                     placeholder="Enter your name"
                     required
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    className="w-full px-3 py-2.5 text-sm rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium shadow-inner"
                     disabled={loading}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Mobile Number <span className="text-red-500">*</span>
+                  <label className="block text-xs font-medium text-white/80 mb-1.5">
+                    Mobile Number <span className="text-red-400">*</span>
                   </label>
-                  <div className="flex items-center bg-white border border-neutral-300 rounded-lg overflow-hidden focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-200">
-                    <div className="px-3 py-2.5 text-sm font-medium text-neutral-600 border-r border-neutral-300 bg-neutral-50">
+                  <div className="flex items-center rounded-lg overflow-hidden border border-white/10 bg-black/20 focus-within:border-green-400/50 focus-within:bg-black/30 transition-all">
+                    <div className="px-3 py-2.5 text-sm font-medium text-white/60 border-r border-white/10">
                       +91
                     </div>
                     <input
@@ -329,15 +337,15 @@ export default function SellerSignUp() {
                       placeholder="Enter mobile number"
                       required
                       maxLength={10}
-                      className="flex-1 px-3 py-2.5 text-sm placeholder:text-neutral-400 focus:outline-none"
+                      className="flex-1 px-3 py-2.5 text-sm bg-transparent text-white placeholder:text-white/30 focus:outline-none font-medium"
                       disabled={loading}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Email <span className="text-red-500">*</span>
+                  <label className="block text-xs font-medium text-white/80 mb-1.5">
+                    Email <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -346,14 +354,14 @@ export default function SellerSignUp() {
                     onChange={handleInputChange}
                     placeholder="Enter email address"
                     required
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    className="w-full px-3 py-2.5 text-sm rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium shadow-inner"
                     disabled={loading}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Store Name <span className="text-red-500">*</span>
+                  <label className="block text-xs font-medium text-white/80 mb-1.5">
+                    Store Name <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -362,33 +370,33 @@ export default function SellerSignUp() {
                     onChange={handleInputChange}
                     placeholder="Enter store name"
                     required
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    className="w-full px-3 py-2.5 text-sm rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium shadow-inner"
                     disabled={loading}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Categories <span className="text-red-500">*</span>
+                  <label className="block text-xs font-medium text-white/80 mb-1.5">
+                    Categories <span className="text-red-400">*</span>
                   </label>
                   {categories.length === 0 ? (
-                    <div className="text-sm text-neutral-500 py-2">
+                    <div className="text-sm text-white/50 py-2">
                       Loading categories...
                     </div>
                   ) : (
-                    <div className="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto p-2 border border-neutral-200 rounded-lg">
+                    <div className="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto p-2 border border-white/10 rounded-lg bg-black/10">
                       {categories.map((cat) => {
                         const checked = formData.categories.includes(cat.name);
                         return (
                           <label
                             key={cat._id}
-                            className="flex items-center gap-2 text-sm text-neutral-700">
+                            className="flex items-center gap-2 text-sm text-white/80 cursor-pointer hover:bg-white/5 p-1 rounded transition-colors">
                             <input
                               type="checkbox"
                               checked={checked}
                               onChange={() => toggleCategory(cat.name)}
                               disabled={loading}
-                              className="h-4 w-4 text-teal-600 border-neutral-300 rounded focus:ring-teal-500"
+                              className="h-4 w-4 text-green-500 border-white/30 rounded focus:ring-green-500 bg-black/30"
                             />
                             <span>{cat.name}</span>
                           </label>
@@ -398,15 +406,15 @@ export default function SellerSignUp() {
                   )}
                   {formData.categories.length === 0 &&
                     categories.length > 0 && (
-                      <p className="text-xs text-red-600 mt-1">
+                      <p className="text-xs text-red-300 mt-1">
                         Select at least one category
                       </p>
                     )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Store Location <span className="text-red-500">*</span>
+                  <label className="block text-xs font-medium text-white/80 mb-1.5">
+                    Store Location <span className="text-red-400">*</span>
                   </label>
                   <div className="flex gap-2 items-start">
                     <div className="flex-1">
@@ -431,6 +439,7 @@ export default function SellerSignUp() {
                         placeholder="Search your store location..."
                         disabled={loading}
                         required
+                        className="!bg-black/20 !border-white/10 !text-white !placeholder-white/30 !rounded-lg focus:!border-green-400/50 focus:!bg-black/30"
                       />
                     </div>
                     <button
@@ -466,7 +475,7 @@ export default function SellerSignUp() {
                           );
                         }
                       }}
-                      className="p-2.5 bg-teal-50 text-teal-600 rounded-lg border border-teal-200 hover:bg-teal-100 transition-colors"
+                      className="p-2.5 bg-white/10 text-white rounded-lg border border-white/10 hover:bg-white/20 transition-colors"
                       title="Use Current Location">
                       <svg
                         width="20"
@@ -486,31 +495,33 @@ export default function SellerSignUp() {
 
                   {formData.latitude && formData.longitude ? (
                     <div className="mt-4 animate-fadeIn">
-                      <p className="text-sm font-medium text-neutral-700 mb-2">
+                      <p className="text-xs font-medium text-white/90 mb-2">
                         Exact Location{" "}
-                        <span className="text-teal-600 text-xs font-normal">
+                        <span className="text-green-300 text-[10px] font-normal">
                           (Move the map to place the pin on your store's
                           entrance)
                         </span>
                       </p>
-                      <LocationPickerMap
-                        initialLat={parseFloat(formData.latitude)}
-                        initialLng={parseFloat(formData.longitude)}
-                        onLocationSelect={(lat, lng) => {
-                          setFormData((prev) => ({
-                            ...prev,
-                            latitude: lat.toString(),
-                            longitude: lng.toString(),
-                          }));
-                        }}
-                      />
-                      <p className="mt-1 text-xs text-neutral-500 text-center">
+                      <div className="border border-white/20 rounded-lg overflow-hidden">
+                        <LocationPickerMap
+                          initialLat={parseFloat(formData.latitude)}
+                          initialLng={parseFloat(formData.longitude)}
+                          onLocationSelect={(lat, lng) => {
+                            setFormData((prev) => ({
+                              ...prev,
+                              latitude: lat.toString(),
+                              longitude: lng.toString(),
+                            }));
+                          }}
+                        />
+                      </div>
+                      <p className="mt-1 text-xs text-white/50 text-center">
                         Selected Coordinates: {formData.latitude},{" "}
                         {formData.longitude}
                       </p>
                     </div>
                   ) : (
-                    <div className="mt-2 text-xs text-neutral-500 bg-neutral-50 p-2 rounded border border-neutral-100 text-center">
+                    <div className="mt-2 text-xs text-white/50 bg-white/5 p-2 rounded border border-white/10 text-center">
                       Search for a location or use the location button to view
                       the map and set exact coordinates.
                     </div>
@@ -518,10 +529,10 @@ export default function SellerSignUp() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label className="block text-xs font-medium text-white/80 mb-1.5">
                     Delivery/Service Radius (KM){" "}
-                    <span className="text-red-500">*</span>
-                    <span className="text-xs font-normal text-neutral-500 ml-1">
+                    <span className="text-red-400">*</span>
+                    <span className="text-[10px] font-normal text-white/50 ml-1">
                       (Distance you can deliver)
                     </span>
                   </label>
@@ -540,18 +551,18 @@ export default function SellerSignUp() {
                     min="0.1"
                     max="100"
                     step="0.1"
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    className="w-full px-3 py-2.5 text-sm rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium shadow-inner"
                     disabled={loading}
                   />
-                  <p className="mt-1 text-xs text-neutral-500">
+                  <p className="mt-1 text-xs text-white/50">
                     Only customers within this radius can see and order your
                     products
                   </p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    City <span className="text-red-500">*</span>
+                  <label className="block text-xs font-medium text-white/80 mb-1.5">
+                    City <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -560,7 +571,7 @@ export default function SellerSignUp() {
                     onChange={handleInputChange}
                     placeholder="Enter city"
                     required
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    className="w-full px-3 py-2.5 text-sm rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium shadow-inner"
                     disabled={loading}
                   />
                 </div>
@@ -579,14 +590,14 @@ export default function SellerSignUp() {
               </div>
 
               {/* Optional Fields Section */}
-              <div className="space-y-4 pt-4 border-t">
-                <h3 className="text-sm font-semibold text-neutral-700 border-b pb-2">
+              <div className="space-y-4 pt-4 border-t border-white/10">
+                <h3 className="text-sm font-semibold text-white/90 border-b border-white/20 pb-2">
                   Optional Information
                 </h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    <label className="block text-xs font-medium text-white/80 mb-1.5">
                       PAN Card
                     </label>
                     <input
@@ -595,13 +606,13 @@ export default function SellerSignUp() {
                       value={formData.panCard}
                       onChange={handleInputChange}
                       placeholder="PAN Card Number"
-                      className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                      className="w-full px-3 py-2.5 text-sm rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium shadow-inner"
                       disabled={loading}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    <label className="block text-xs font-medium text-white/80 mb-1.5">
                       Tax Name
                     </label>
                     <input
@@ -610,13 +621,13 @@ export default function SellerSignUp() {
                       value={formData.taxName}
                       onChange={handleInputChange}
                       placeholder="Tax Name"
-                      className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                      className="w-full px-3 py-2.5 text-sm rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium shadow-inner"
                       disabled={loading}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    <label className="block text-xs font-medium text-white/80 mb-1.5">
                       Tax Number
                     </label>
                     <input
@@ -625,13 +636,13 @@ export default function SellerSignUp() {
                       value={formData.taxNumber}
                       onChange={handleInputChange}
                       placeholder="Tax Number"
-                      className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                      className="w-full px-3 py-2.5 text-sm rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium shadow-inner"
                       disabled={loading}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    <label className="block text-xs font-medium text-white/80 mb-1.5">
                       IFSC Code
                     </label>
                     <input
@@ -640,7 +651,7 @@ export default function SellerSignUp() {
                       value={formData.ifsc}
                       onChange={handleInputChange}
                       placeholder="IFSC Code"
-                      className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                      className="w-full px-3 py-2.5 text-sm rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium shadow-inner"
                       disabled={loading}
                     />
                   </div>
@@ -648,7 +659,7 @@ export default function SellerSignUp() {
               </div>
 
               {error && (
-                <div className="text-sm text-red-600 bg-red-50 p-2 rounded text-center">
+                <div className="p-2 bg-red-500/20 border border-red-500/30 backdrop-blur-sm text-red-100 text-xs rounded-lg text-center">
                   {error}
                 </div>
               )}
@@ -656,22 +667,31 @@ export default function SellerSignUp() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full py-2.5 rounded-lg font-semibold text-sm transition-colors ${
-                  !loading
-                    ? "bg-teal-600 text-white hover:bg-teal-700 shadow-md"
-                    : "bg-neutral-300 text-neutral-500 cursor-not-allowed"
-                }`}>
-                {loading ? "Creating Account..." : "Sign Up"}
+                className={`w-full py-3 rounded-xl font-bold text-sm tracking-wide transition-all shadow-lg overflow-hidden relative group ${!loading
+                  ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:shadow-green-500/40 hover:scale-[1.02] active:scale-[0.98]"
+                  : "bg-white/10 text-white/30 cursor-not-allowed border border-white/5"
+                  }`}>
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none" />
+                <span className="relative flex items-center justify-center gap-2">
+                  {loading ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>Creating Account...</span>
+                    </>
+                  ) : (
+                    "Sign Up"
+                  )}
+                </span>
               </button>
 
               {/* Login Link */}
-              <div className="text-center pt-2 border-t border-neutral-200">
-                <p className="text-sm text-neutral-600">
+              <div className="text-center pt-2">
+                <p className="text-xs text-white/60">
                   Already have a seller account?{" "}
                   <button
                     type="button"
                     onClick={() => navigate("/seller/login")}
-                    className="text-teal-600 hover:text-teal-700 font-semibold">
+                    className="text-white hover:text-green-300 font-semibold hover:underline transition-colors">
                     Login
                   </button>
                 </p>
@@ -679,32 +699,40 @@ export default function SellerSignUp() {
             </form>
           ) : (
             /* OTP Verification Form */
-            <div className="space-y-4">
-              <div className="text-center">
-                <p className="text-sm text-neutral-600 mb-2">
-                  Enter the 4-digit OTP sent to
-                </p>
-                <p className="text-sm font-semibold text-neutral-800">
-                  +91 {formData.mobile}
+            <div className="space-y-5 animate-fade-in">
+              <div className="text-center space-y-1">
+                <h1 className="text-xl font-bold text-white">
+                  Verify OTP
+                </h1>
+                <p className="text-xs text-green-100/80">
+                  Enter the code sent to
+                  <br />
+                  <span className="font-semibold text-white text-base tracking-wider">
+                    +91 {formData.mobile}
+                  </span>
                 </p>
               </div>
 
-              <OTPInput onComplete={handleOTPComplete} disabled={loading} />
+              <div className="flex justify-center py-2">
+                <div className="bg-white/5 p-3 rounded-xl border border-white/10 backdrop-blur-sm">
+                  <OTPInput onComplete={handleOTPComplete} disabled={loading} />
+                </div>
+              </div>
 
               {error && (
-                <div className="text-sm text-red-600 bg-red-50 p-2 rounded text-center">
+                <div className="p-2 bg-red-500/20 border border-red-500/30 backdrop-blur-sm text-red-100 text-xs rounded-lg text-center">
                   {error}
                 </div>
               )}
 
-              <div className="flex gap-2">
+              <div className="gap-2 grid grid-cols-2">
                 <button
                   onClick={() => {
                     setShowOTP(false);
                     setError("");
                   }}
                   disabled={loading}
-                  className="flex-1 py-2.5 rounded-lg font-semibold text-sm bg-neutral-100 text-neutral-700 hover:bg-neutral-200 transition-colors border border-neutral-300">
+                  className="py-2.5 rounded-lg text-xs font-semibold text-white/70 hover:text-white hover:bg-white/10 border border-white/10 transition-all active:scale-95">
                   Back
                 </button>
                 <button
@@ -722,19 +750,21 @@ export default function SellerSignUp() {
                     }
                   }}
                   disabled={loading}
-                  className="flex-1 py-2.5 rounded-lg font-semibold text-sm bg-teal-600 text-white hover:bg-teal-700 transition-colors">
+                  className="py-2.5 rounded-lg text-xs font-semibold text-green-400 hover:text-green-300 hover:bg-green-500/10 border border-green-500/20 transition-all active:scale-95">
                   {loading ? "Sending..." : "Resend OTP"}
                 </button>
               </div>
             </div>
           )}
         </div>
-      </div>
 
-      {/* Footer Text */}
-      <p className="mt-6 text-xs text-neutral-500 text-center max-w-md">
-        By continuing, you agree to Kosil's Terms of Service and Privacy Policy
-      </p>
+        {/* Footer */}
+        <div className="px-6 py-3 bg-black/20 border-t border-white/10 text-center backdrop-blur-md">
+          <p className="text-[9px] text-white/50">
+            By continuing, you agree to Aadekh's Terms of Service and Privacy Policy
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

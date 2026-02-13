@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import kosilLogo from "@assets/kosil1.png";
 import { useAuth } from "../../../context/AuthContext";
 
 interface SellerHeaderProps {
@@ -106,15 +105,15 @@ export default function SellerHeader({
               </svg>
             )}
           </button>
-          {/* Kosil Logo */}
+          {/* Aadekh Logo */}
           <button
             onClick={handleLogoClick}
             className="hover:opacity-80 transition-opacity">
             <img
-              src={kosilLogo}
-              alt="Kosil"
-              className="h-10 sm:h-12 w-auto object-contain cursor-pointer"
-              style={{ maxWidth: "200px" }}
+              src="/assets/aadekh_logo-removebg-preview.png"
+              alt="Aadekh"
+              className="h-24 sm:h-28 w-auto object-contain cursor-pointer -my-6 sm:-my-8 relative z-50"
+              style={{ maxWidth: "none" }}
             />
           </button>
 
@@ -146,29 +145,26 @@ export default function SellerHeader({
         <div className="hidden md:flex items-center gap-4 lg:gap-6">
           <button
             onClick={() => navigate("/seller/orders")}
-            className={`relative px-3 lg:px-4 py-2 text-xs sm:text-sm font-medium transition-colors ${
-              isActive("/seller/orders")
-                ? "text-neutral-900"
-                : "text-neutral-600 hover:text-neutral-900"
-            }`}>
+            className={`relative px-3 lg:px-4 py-2 text-xs sm:text-sm font-medium transition-colors ${isActive("/seller/orders")
+              ? "text-neutral-900"
+              : "text-neutral-600 hover:text-neutral-900"
+              }`}>
             Orders
           </button>
           <button
             onClick={() => navigate("/seller/return-order")}
-            className={`px-3 lg:px-4 py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
-              isActive("/seller/return-order")
-                ? "text-neutral-900"
-                : "text-neutral-600 hover:text-neutral-900"
-            }`}>
+            className={`px-3 lg:px-4 py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${isActive("/seller/return-order")
+              ? "text-neutral-900"
+              : "text-neutral-600 hover:text-neutral-900"
+              }`}>
             Return Order
           </button>
           <button
             onClick={() => navigate("/seller/wallet")}
-            className={`px-3 lg:px-4 py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
-              isActive("/seller/wallet")
-                ? "text-neutral-900"
-                : "text-neutral-600 hover:text-neutral-900"
-            }`}>
+            className={`px-3 lg:px-4 py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${isActive("/seller/wallet")
+              ? "text-neutral-900"
+              : "text-neutral-600 hover:text-neutral-900"
+              }`}>
             Wallet
           </button>
         </div>

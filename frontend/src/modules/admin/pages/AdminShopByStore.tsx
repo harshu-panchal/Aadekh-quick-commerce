@@ -238,7 +238,7 @@ export default function AdminShopByStore() {
 
       // Upload store image if provided
       if (storeImageFile) {
-        const imageResult = await uploadImage(storeImageFile, "kosil/stores");
+        const imageResult = await uploadImage(storeImageFile, "aadekh/stores");
         imageUrl = imageResult.secureUrl;
       } else if (editingId && !storeImagePreview) {
         // If editing and no new image and no preview, we need at least one image
@@ -1078,7 +1078,7 @@ export default function AdminShopByStore() {
       <div className="text-center text-sm text-neutral-500 py-4">
         Copyright © 2025. Developed By{" "}
         <a href="#" className="text-teal-600 hover:text-teal-700">
-          Kosil - 10 Minute App
+          Aadekh - 10 Minute App
         </a>
       </div>
     </div>

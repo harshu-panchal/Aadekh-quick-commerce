@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   sendOTP,
@@ -15,8 +15,6 @@ export default function Login() {
   const [sessionId, setSessionId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleContinue = async () => {
     if (mobileNumber.length !== 10) return;
@@ -47,7 +45,6 @@ export default function Login() {
     try {
       const response = await verifyOTP(mobileNumber, otp, sessionId);
       if (response.success && response.data) {
-        // Update auth context with user data
         login(response.data.token, {
           id: response.data.user.id,
           name: response.data.user.name,
@@ -57,10 +54,6 @@ export default function Login() {
           refCode: response.data.user.refCode,
           status: response.data.user.status,
         });
-
-        // FCM token registration is handled globally by App.tsx when auth state changes
-        // No need to call registerFCMToken here - it would cause duplicate notifications
-
         navigate("/");
       }
     } catch (err: any) {
@@ -70,34 +63,26 @@ export default function Login() {
     }
   };
 
-  const handleZomatoLogin = () => {
-    // Handle Zomato login logic here
-    navigate("/");
-  };
-
   return (
-    <div
-      className="h-screen bg-white flex flex-col"
-      style={{
-        overflow: "hidden",
-        backgroundColor: "#ffffff",
-        width: "100%",
-        margin: 0,
-        padding: 0,
-        boxSizing: "border-box",
-      }}>
+    <div className="min-h-screen relative flex flex-col items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-[#0f2e20] via-[#1a4a33] to-[#0c831f]">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-green-500/20 blur-[100px] animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-teal-400/20 blur-[120px] animate-pulse delay-700" />
+      <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] rounded-full bg-emerald-400/10 blur-[80px]" />
+
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-neutral-50 transition-colors"
-        aria-label="Back">
+        className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-95"
+        aria-label="Back"
+      >
         <svg
-          width="18"
-          height="18"
-          className="sm:w-5 sm:h-5"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M15 18L9 12L15 6"
             stroke="currentColor"
@@ -108,169 +93,169 @@ export default function Login() {
         </svg>
       </button>
 
-      {/* Video Section */}
-      <div
-        className="overflow-hidden relative flex-1"
-        style={{
-          minHeight: 0,
-          border: "none",
-          borderBottom: "none",
-          padding: 0,
-          margin: 0,
-          marginLeft: "2px",
-          backgroundColor: "#ffffff",
-          zIndex: 0,
-          width: "calc(100% - 2px)",
-          boxSizing: "border-box",
-          position: "relative",
-        }}>
-        <video
-          ref={videoRef}
-          src="/assets/login/loginvideo.mp4?v=2"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-          key="login-video-v2"
-          onLoadedMetadata={() => {
-            if (videoRef.current) {
-              videoRef.current.playbackRate = 1.5;
-            }
-          }}
-          style={{
-            display: "block",
-            width: "100%",
-            height: "100%",
-            margin: 0,
-            padding: 0,
-            border: "none",
-            outline: "none",
-            boxShadow: "none",
-            verticalAlign: "top",
-            objectFit: "cover",
-            objectPosition: "center top",
-            background: "transparent",
-            position: "relative",
-            zIndex: 0,
-            borderBottomLeftRadius: 0,
-            borderBottomRightRadius: 0,
-            transform: "translateY(-60px)",
-            marginTop: "-60px",
-          }}
-        />
-      </div>
+      {/* Glassmorphism Card */}
+      <div className="w-full max-w-sm relative z-10 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] overflow-hidden animate-fade-in-up">
+        <div className="p-6 relative">
 
-      {/* Login Section */}
-      <div
-        className="bg-white flex flex-col items-center flex-shrink-0 relative"
-        style={{
-          border: "none",
-          borderTop: "none",
-          margin: 0,
-          marginTop: "-100px",
-          marginLeft: "-2px",
-          boxShadow: "none",
-          outline: "none",
-          backgroundColor: "#ffffff",
-          zIndex: 1,
-          padding: "4px 0px 12px",
-          paddingTop: "6px",
-          width: "calc(100% + 4px)",
-          boxSizing: "border-box",
-          position: "relative",
-        }}>
-        {!showOTP ? (
-          <>
-            {/* Mobile Number Input */}
-            <div
-              className="w-full mb-1.5 sm:mb-2.5 px-4 relative z-10"
-              style={{ maxWidth: "100%" }}>
-              <div className="flex items-center bg-white border border-neutral-300 rounded-lg overflow-hidden focus-within:border-neutral-400 transition-colors">
-                <div className="px-3 py-2 sm:py-2.5 text-sm font-medium text-neutral-400 border-r border-neutral-300 bg-white">
-                  +91
+          {/* Logo Section */}
+          <div className="flex flex-col items-center mb-2">
+            <div className="relative mb-2 group">
+              <div className="absolute inset-0 bg-white/20 rounded-full blur-xl transform group-hover:scale-110 transition-transform duration-500" />
+              <img
+                src="/assets/aadekh_logo-removebg-preview.png"
+                alt="Aadekh"
+                className="h-40 w-auto object-contain relative z-10 drop-shadow-lg transform hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            {!showOTP && (
+              <div className="text-center space-y-0.5">
+                <h1 className="text-xl font-bold text-white tracking-tight">
+                  Welcome Back
+                </h1>
+                <p className="text-green-100/80 text-xs font-medium">
+                  Login to continue your shopping
+                </p>
+              </div>
+            )}
+          </div>
+
+          {!showOTP ? (
+            <div className="space-y-4">
+              <div className="space-y-4">
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+                    <span className="text-white/60 font-medium pr-2 border-r border-white/20 text-sm">
+                      +91
+                    </span>
+                  </div>
+                  <input
+                    type="tel"
+                    value={mobileNumber}
+                    onChange={(e) =>
+                      setMobileNumber(
+                        e.target.value.replace(/\D/g, "").slice(0, 10)
+                      )
+                    }
+                    placeholder="Enter mobile number"
+                    className="w-full pl-12 pr-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
+                    maxLength={10}
+                    disabled={loading}
+                    autoFocus
+                  />
                 </div>
-                <input
-                  type="tel"
-                  value={mobileNumber}
-                  onChange={(e) =>
-                    setMobileNumber(
-                      e.target.value.replace(/\D/g, "").slice(0, 10)
-                    )
-                  }
-                  placeholder="Enter mobile number"
-                  className="flex-1 px-3 py-2 sm:py-2.5 text-sm placeholder:text-neutral-400 focus:outline-none bg-white"
-                  style={{ color: "#9ca3af", backgroundColor: "#ffffff" }}
-                  maxLength={10}
+
+                {error && (
+                  <div className="p-2 bg-red-500/20 border border-red-500/30 backdrop-blur-sm text-red-100 text-xs rounded-lg flex items-center gap-2 animate-shake">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                      <path d="M12 8v4M12 16h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {error}
+                  </div>
+                )}
+
+                <button
+                  onClick={handleContinue}
+                  disabled={mobileNumber.length !== 10 || loading}
+                  className={`w-full py-3 rounded-xl font-bold text-sm tracking-wide transition-all shadow-lg overflow-hidden relative group ${mobileNumber.length === 10 && !loading
+                    ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:shadow-green-500/40 hover:scale-[1.02] active:scale-[0.98]"
+                    : "bg-white/10 text-white/30 cursor-not-allowed border border-white/5"
+                    }`}
+                >
+                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none" />
+                  <span className="relative flex items-center justify-center gap-2">
+                    {loading ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      "Continue Securely"
+                    )}
+                  </span>
+                </button>
+                <div className="text-center pt-1">
+                  <p className="text-xs text-white/60">
+                    Don't have an account?{" "}
+                    <button
+                      onClick={() => navigate('/register')}
+                      className="text-white hover:text-green-300 font-semibold hover:underline transition-colors"
+                    >
+                      Register
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-5 animate-fade-in">
+              <div className="text-center space-y-1">
+                <h1 className="text-xl font-bold text-white">
+                  Verify OTP
+                </h1>
+                <p className="text-xs text-green-100/80">
+                  Enter the code sent to
+                  <br />
+                  <span className="font-semibold text-white text-base tracking-wider">
+                    +91 {mobileNumber}
+                  </span>
+                </p>
+              </div>
+
+              <div className="flex justify-center py-2">
+                <div className="bg-white/5 p-3 rounded-xl border border-white/10 backdrop-blur-sm">
+                  <OTPInput onComplete={handleOTPComplete} disabled={loading} />
+                </div>
+              </div>
+
+              {error && (
+                <div className="p-2 bg-red-500/20 border border-red-500/30 backdrop-blur-sm text-red-100 text-xs rounded-lg text-center">
+                  {error}
+                </div>
+              )}
+
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <button
+                  onClick={() => {
+                    setShowOTP(false);
+                    setError("");
+                  }}
                   disabled={loading}
-                />
+                  className="py-2.5 rounded-lg text-xs font-semibold text-white/70 hover:text-white hover:bg-white/10 border border-white/10 transition-all active:scale-95"
+                >
+                  Change Number
+                </button>
+                <button
+                  onClick={handleContinue}
+                  disabled={loading}
+                  className="py-2.5 rounded-lg text-xs font-semibold text-green-400 hover:text-green-300 hover:bg-green-500/10 border border-green-500/20 transition-all active:scale-95"
+                >
+                  {loading ? "Resending..." : "Resend OTP"}
+                </button>
               </div>
             </div>
+          )}
+        </div>
 
-            {error && (
-              <div className="w-full mb-1 px-4 relative z-10 text-xs text-red-600 bg-red-50 p-2 rounded">
-                {error}
-              </div>
-            )}
-
-            {/* Continue Button */}
-            <div
-              className="w-full mb-1 px-4 relative z-10"
-              style={{ maxWidth: "100%" }}>
-              <button
-                onClick={handleContinue}
-                disabled={mobileNumber.length !== 10 || loading}
-                className={`w-full py-2 sm:py-2.5 rounded-lg font-semibold text-sm transition-colors border px-3 ${mobileNumber.length === 10 && !loading
-                  ? "bg-orange-50 text-orange-600 border-orange-500 hover:bg-orange-100"
-                  : "bg-neutral-300 text-neutral-500 cursor-not-allowed border-neutral-300"
-                  }`}>
-                {loading ? "Calling..." : "Continue"}
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            {/* OTP Verification */}
-            <div className="w-full mb-2 px-4 relative z-10 text-center">
-              <p className="text-xs text-neutral-600 mb-2">
-                Enter the 4-digit OTP sent via voice call to
-              </p>
-              <p className="text-xs font-semibold text-neutral-800">
-                +91 {mobileNumber}
-              </p>
-            </div>
-            <div className="w-full mb-2 px-4 relative z-10 flex justify-center">
-              <OTPInput onComplete={handleOTPComplete} disabled={loading} />
-            </div>
-            {error && (
-              <div className="w-full mb-1 px-4 relative z-10 text-xs text-red-600 bg-red-50 p-2 rounded text-center">
-                {error}
-              </div>
-            )}
-            <div className="w-full mb-1 px-4 relative z-10 flex gap-2">
-              <button
-                onClick={() => {
-                  setShowOTP(false);
-                  setError("");
-                }}
-                disabled={loading}
-                className="flex-1 py-2 rounded-lg font-semibold text-xs bg-neutral-100 text-neutral-700 hover:bg-neutral-200 transition-colors border border-neutral-300">
-                Change Number
-              </button>
-              <button
-                onClick={handleContinue}
-                disabled={loading}
-                className="flex-1 py-2 rounded-lg font-semibold text-xs bg-orange-50 text-orange-600 border border-orange-500 hover:bg-orange-100 transition-colors">
-                {loading ? "Verifying..." : "Resend OTP"}
-              </button>
-            </div>
-          </>
-        )}
-
-        {/* Privacy Text */}
-        <p className="text-[9px] sm:text-[10px] text-neutral-500 text-center max-w-sm leading-tight px-4 relative z-10 pb-1">
-          Access your saved addresses from Kosil automatically!
-        </p>
+        {/* Footer */}
+        <div className="px-6 py-3 bg-black/20 border-t border-white/10 text-center backdrop-blur-md">
+          <p className="text-[9px] text-white/50">
+            By continuing, you agree to our{" "}
+            <a href="#" className="text-green-400 hover:text-green-300 hover:underline transition-colors">
+              Terms of Service
+            </a>{" "}
+            and{" "}
+            <a href="#" className="text-green-400 hover:text-green-300 hover:underline transition-colors">
+              Privacy Policy
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

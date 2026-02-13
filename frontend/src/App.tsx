@@ -35,6 +35,7 @@ const Categories = lazy(() => import("./modules/user/Categories"));
 const Category = lazy(() => import("./modules/user/Category"));
 const Invoice = lazy(() => import("./modules/user/Invoice"));
 const Login = lazy(() => import("./modules/user/Login"));
+const Register = lazy(() => import("./modules/user/Register"));
 
 const AboutUs = lazy(() => import("./modules/user/AboutUs"));
 const FAQ = lazy(() => import("./modules/user/FAQ"));
@@ -155,6 +156,7 @@ const AdminDashboard = lazy(
   () => import("./modules/admin/pages/AdminDashboard"),
 );
 const AdminLogin = lazy(() => import("./modules/admin/pages/AdminLogin"));
+const AdminRegister = lazy(() => import("./modules/admin/pages/AdminRegister"));
 const AdminCategory = lazy(() => import("./modules/admin/pages/AdminCategory"));
 const AdminHeaderCategory = lazy(
   () => import("./modules/admin/pages/AdminHeaderCategory"),
@@ -313,6 +315,16 @@ function AppContent() {
                             </PublicRoute>
                           }
                         />
+                        <Route
+                          path="/register"
+                          element={
+                            <PublicRoute>
+                              <Suspense fallback={<IconLoader forceShow />}>
+                                <Register />
+                              </Suspense>
+                            </PublicRoute>
+                          }
+                        />
 
                         <Route
                           path="/seller/login"
@@ -360,6 +372,16 @@ function AppContent() {
                             <PublicRoute>
                               <Suspense fallback={<IconLoader forceShow />}>
                                 <AdminLogin />
+                              </Suspense>
+                            </PublicRoute>
+                          }
+                        />
+                        <Route
+                          path="/admin/register"
+                          element={
+                            <PublicRoute>
+                              <Suspense fallback={<IconLoader forceShow />}>
+                                <AdminRegister />
                               </Suspense>
                             </PublicRoute>
                           }

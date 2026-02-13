@@ -31,24 +31,26 @@ const HomeBannerCarousel = ({ banners }: HomeBannerCarouselProps) => {
 
   return (
     <div className="w-full px-4 md:px-6 lg:px-8 mt-4 md:mt-6">
-      <div className="relative overflow-hidden rounded-2xl aspect-[21/9] md:aspect-[3/1] lg:aspect-[4/1] bg-neutral-100">
+      <div className="relative overflow-hidden rounded-2xl aspect-[1.5/1] md:aspect-[3/1] lg:aspect-[4/1] bg-neutral-100 shadow-sm group">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="absolute inset-0">
-            <Link
-              to={banners[currentSlide].link}
-              className="block w-full h-full">
+            className="absolute inset-0 bg-neutral-200"
+          >
+            <Link to={banners[currentSlide].link} className="block w-full h-full relative">
+              {/* Main Image - Cover to fill width, aspect ratio adjusted to minimize cropping */}
               <img
                 src={banners[currentSlide].image}
                 alt={banners[currentSlide].title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+
+              {/* Vertical gradient for text readability if needed */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
             </Link>
           </motion.div>
         </AnimatePresence>
@@ -60,9 +62,8 @@ const HomeBannerCarousel = ({ banners }: HomeBannerCarouselProps) => {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentSlide ? "bg-white w-6" : "bg-white/50"
-                }`}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide ? "bg-white w-6" : "bg-white/50"
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}

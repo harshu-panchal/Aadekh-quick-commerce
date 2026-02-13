@@ -148,7 +148,7 @@ export default function AdminSubCategory() {
       if (subcategoryImageFile) {
         const imageResult = await uploadImage(
           subcategoryImageFile,
-          "kosil/subcategories"
+          "aadekh/subcategories"
         );
         imageUrl = imageResult.secureUrl;
       }
@@ -779,7 +779,7 @@ export default function AdminSubCategory() {
       <div className="text-center text-sm text-neutral-500 py-4">
         Copyright © 2025. Developed By{" "}
         <a href="#" className="text-teal-600 hover:text-teal-700">
-          Kosil - 10 Minute App
+          Aadekh - 10 Minute App
         </a>
       </div>
     </div>

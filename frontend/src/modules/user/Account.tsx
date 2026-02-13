@@ -438,7 +438,7 @@ export default function Account() {
             <span className="text-neutral-400">›</span>
           </button>
           <button
-            onClick={() => (window.location.href = "https://about.kosil.com")}
+            onClick={() => (window.location.href = "https://about.aadekh.com")}
             className="w-full flex items-center justify-between px-3 py-3 hover:bg-neutral-50 transition-colors">
             <div className="flex items-center gap-3">
               <svg

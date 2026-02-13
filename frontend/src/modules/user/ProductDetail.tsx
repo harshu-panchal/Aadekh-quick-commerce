@@ -943,7 +943,7 @@ export default function ProductDetail() {
                         Customer Care Details:
                       </span>
                       <span className="text-xs text-neutral-600">
-                        Email: help@kosil.com
+                        Email: help@aadekh.com
                       </span>
                     </div>
                     <div className="flex items-start">
@@ -983,7 +983,7 @@ export default function ProductDetail() {
                           Seller:
                         </span>
                         <span className="text-xs text-neutral-600 leading-relaxed flex-1">
-                          Kosil Partner (
+                          Aadekh Partner (
                           {product.sellerId.slice(-6).toUpperCase()})
                         </span>
                       </div>

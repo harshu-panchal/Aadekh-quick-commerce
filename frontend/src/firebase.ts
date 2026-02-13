@@ -1,6 +1,6 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, FirebaseApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage, Messaging } from 'firebase/messaging';
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, Analytics } from "firebase/analytics";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -12,19 +12,26 @@ const firebaseConfig = {
     measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
+let app: FirebaseApp | null = null;
+let analytics: Analytics | null = null;
 let messaging: Messaging | null = null;
 
 try {
-    messaging = getMessaging(app);
-} catch (error: any) {
-    console.warn('Firebase Messaging not supported in this environment.', error);
-    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Only alert on mobile to avoid annoying desktop devs
-        alert(`⚠️ Firebase Messaging Init Failed: ${error.message || 'Unknown error'}`);
+    // Only initialize if we have the minimum required config
+    if (firebaseConfig.projectId && firebaseConfig.apiKey) {
+        app = initializeApp(firebaseConfig);
+        analytics = getAnalytics(app);
+
+        try {
+            messaging = getMessaging(app);
+        } catch (error: any) {
+            console.warn('Firebase Messaging not supported in this environment.', error);
+        }
+    } else {
+        console.warn('Firebase configuration missing. App features dependent on Firebase will be disabled.');
     }
+} catch (error) {
+    console.error('Error initializing Firebase:', error);
 }
 
 export { messaging, getToken, onMessage };

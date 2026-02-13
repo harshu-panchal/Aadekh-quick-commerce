@@ -37,25 +37,14 @@ export default function AboutUs() {
       <div className="px-4 md:px-6 lg:px-8 py-6 max-w-3xl mx-auto">
         {/* Logo/Brand Section */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 mb-4 shadow-lg">
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-white">
-              <path
-                d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="currentColor"
-              />
-            </svg>
+          <div className="inline-flex items-center justify-center w-24 h-24 mb-4">
+            <img
+              src="/assets/aadekh_logo-removebg-preview.png"
+              alt="Aadekh Logo"
+              className="w-full h-full object-contain"
+            />
           </div>
-          <h2 className="text-3xl font-bold text-neutral-900 mb-2">Kosil</h2>
+          <h2 className="text-3xl font-bold text-neutral-900 mb-2">Aadekh</h2>
           <p className="text-sm text-neutral-600">
             Your Trusted Delivery Partner
           </p>
@@ -89,7 +78,7 @@ export default function AboutUs() {
             Our Mission
           </h3>
           <p className="text-sm text-neutral-700 leading-relaxed">
-            At Kosil, we're committed to revolutionizing the way you shop and
+            At Aadekh, we're committed to revolutionizing the way you shop and
             receive your products. Our mission is to provide lightning-fast
             delivery services while maintaining the highest standards of quality
             and customer satisfaction.
@@ -133,7 +122,7 @@ export default function AboutUs() {
             What We Do
           </h3>
           <p className="text-sm text-neutral-700 leading-relaxed mb-4">
-            Kosil is a comprehensive e-commerce platform that connects customers
+            Aadekh is a comprehensive e-commerce platform that connects customers
             with a wide range of products across multiple categories including
             groceries, fashion, electronics, pharmacy, and much more.
           </p>
@@ -326,7 +315,7 @@ export default function AboutUs() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span className="text-neutral-700">support@kosil.com</span>
+              <span className="text-neutral-700">support@aadekh.com</span>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <svg
@@ -380,7 +369,7 @@ export default function AboutUs() {
         <div className="mt-8 text-center">
           <p className="text-xs text-neutral-500">Version 1.0.0</p>
           <p className="text-xs text-neutral-500 mt-1">
-            © 2024 Kosil. All rights reserved.
+            © 2024 Aadekh. All rights reserved.
           </p>
         </div>
       </div>
