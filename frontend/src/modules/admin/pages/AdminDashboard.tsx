@@ -114,7 +114,7 @@ export default function AdminDashboard() {
         console.error("Error fetching dashboard data:", err);
         setError(
           err.response?.data?.message ||
-            "Failed to load dashboard data. Please try again."
+          "Failed to load dashboard data. Please try again."
         );
       } finally {
         setLoading(false);
@@ -791,11 +791,10 @@ export default function AdminDashboard() {
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
-                className={`p-2 border border-neutral-300 rounded ${
-                  currentPage === 1
+                className={`p-2 border border-neutral-300 rounded ${currentPage === 1
                     ? "text-neutral-400 cursor-not-allowed bg-neutral-50"
                     : "text-neutral-700 hover:bg-neutral-50"
-                }`}
+                  }`}
                 aria-label="Previous page">
                 <svg
                   width="16"
@@ -819,11 +818,10 @@ export default function AdminDashboard() {
                   )
                 }
                 disabled={currentPage === totalPagesNewOrders}
-                className={`p-2 border border-neutral-300 rounded ${
-                  currentPage === totalPagesNewOrders
+                className={`p-2 border border-neutral-300 rounded ${currentPage === totalPagesNewOrders
                     ? "text-neutral-400 cursor-not-allowed bg-neutral-50"
                     : "text-neutral-700 hover:bg-neutral-50"
-                }`}
+                  }`}
                 aria-label="Next page">
                 <svg
                   width="16"
@@ -994,11 +992,10 @@ export default function AdminDashboard() {
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
-                className={`p-2 border border-neutral-300 rounded ${
-                  currentPage === 1
+                className={`p-2 border border-neutral-300 rounded ${currentPage === 1
                     ? "text-neutral-400 cursor-not-allowed bg-neutral-50"
                     : "text-neutral-700 hover:bg-neutral-50"
-                }`}
+                  }`}
                 aria-label="Previous page">
                 <svg
                   width="16"
@@ -1025,11 +1022,10 @@ export default function AdminDashboard() {
                   )
                 }
                 disabled={currentPage === totalPagesTopSellers}
-                className={`p-2 border border-neutral-300 rounded ${
-                  currentPage === totalPagesTopSellers
+                className={`p-2 border border-neutral-300 rounded ${currentPage === totalPagesTopSellers
                     ? "text-neutral-400 cursor-not-allowed bg-neutral-50"
                     : "text-neutral-700 hover:bg-neutral-50"
-                }`}
+                  }`}
                 aria-label="Next page">
                 <svg
                   width="16"
@@ -1055,7 +1051,7 @@ export default function AdminDashboard() {
       <div className="text-center text-sm text-neutral-500 py-4">
         Copyright © 2025. Developed By{" "}
         <a href="#" className="text-teal-600 hover:text-teal-700">
-          Aadekh - 10 Minute App
+          Grihinee - 10 Minute App
         </a>
       </div>
     </div>

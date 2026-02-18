@@ -166,8 +166,8 @@ export default function AdminSellerLocation() {
           </div>
           <div className="h-96 sm:h-[600px] w-full">
             {selectedSeller &&
-            selectedSeller.latitude &&
-            selectedSeller.longitude ? (
+              selectedSeller.latitude &&
+              selectedSeller.longitude ? (
               <SellerServiceMap
                 latitude={parseFloat(selectedSeller.latitude)}
                 longitude={parseFloat(selectedSeller.longitude)}
@@ -241,11 +241,10 @@ export default function AdminSellerLocation() {
                   <div
                     key={seller._id}
                     onClick={() => handleSellerClick(seller)}
-                    className={`p-4 cursor-pointer transition-colors ${
-                      selectedSeller?._id === seller._id
+                    className={`p-4 cursor-pointer transition-colors ${selectedSeller?._id === seller._id
                         ? "bg-teal-50 border-l-4 border-teal-600"
                         : "hover:bg-neutral-50"
-                    }`}>
+                      }`}>
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex-1">
                         <h3 className="font-semibold text-neutral-900 text-sm">
@@ -289,7 +288,7 @@ export default function AdminSellerLocation() {
       <div className="text-center text-sm text-neutral-500 py-4">
         Copyright © 2025. Developed By{" "}
         <a href="#" className="text-teal-600 hover:text-teal-700">
-          Aadekh - 10 Minute App
+          Grihinee - 10 Minute App
         </a>
       </div>
     </div>

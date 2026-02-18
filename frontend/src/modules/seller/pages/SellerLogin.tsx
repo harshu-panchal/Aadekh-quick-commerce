@@ -105,8 +105,8 @@ export default function SellerLogin() {
             <div className="relative mb-2 group">
               <div className="absolute inset-0 bg-white/20 rounded-full blur-xl transform group-hover:scale-110 transition-transform duration-500" />
               <img
-                src="/assets/aadekh_logo-removebg-preview.png"
-                alt="Aadekh"
+                src="/assets/grihinee-logo.png"
+                alt="Grihinee"
                 className="h-40 w-auto object-contain relative z-10 drop-shadow-lg transform hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -264,7 +264,7 @@ export default function SellerLogin() {
         {/* Footer */}
         <div className="px-6 py-3 bg-black/20 border-t border-white/10 text-center backdrop-blur-md">
           <p className="text-[9px] text-white/50">
-            By continuing, you agree to Aadekh's Terms of Service and Privacy Policy
+            By continuing, you agree to Grihinee's Terms of Service and Privacy Policy
           </p>
         </div>
       </div>

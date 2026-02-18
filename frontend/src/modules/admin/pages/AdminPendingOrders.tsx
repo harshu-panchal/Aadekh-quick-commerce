@@ -84,7 +84,7 @@ export default function AdminPendingOrders() {
           };
           setError(
             axiosError.response?.data?.message ||
-              "Failed to load orders. Please try again."
+            "Failed to load orders. Please try again."
           );
         } else {
           setError("Failed to load orders. Please try again.");
@@ -780,8 +780,8 @@ export default function AdminPendingOrders() {
                       <td className="px-4 sm:px-6 py-3 text-sm text-neutral-600">
                         {order.estimatedDeliveryDate
                           ? new Date(
-                              order.estimatedDeliveryDate
-                            ).toLocaleDateString()
+                            order.estimatedDeliveryDate
+                          ).toLocaleDateString()
                           : "-"}
                       </td>
                       <td className="px-4 sm:px-6 py-3 text-sm text-neutral-600">
@@ -815,11 +815,10 @@ export default function AdminPendingOrders() {
                               setSelectedOrder(order);
                               setAssignModalOpen(true);
                             }}
-                            className={`px-2 py-1.5 text-xs font-medium rounded transition-colors ${
-                              order.deliveryBoyStatus === "Assigned"
+                            className={`px-2 py-1.5 text-xs font-medium rounded transition-colors ${order.deliveryBoyStatus === "Assigned"
                                 ? "bg-green-100 text-green-700 hover:bg-green-200"
                                 : "bg-blue-600 text-white hover:bg-blue-700"
-                            }`}
+                              }`}
                             title={
                               order.deliveryBoyStatus === "Assigned"
                                 ? "Re-assign delivery boy"
@@ -925,7 +924,7 @@ export default function AdminPendingOrders() {
       <div className="text-center py-4 text-xs sm:text-sm text-neutral-600">
         Copyright © 2025. Developed By{" "}
         <Link to="/" className="text-blue-600 hover:text-blue-700">
-          Aadekh - 10 Minute App
+          Grihinee - 10 Minute App
         </Link>
       </div>
 
@@ -944,8 +943,8 @@ export default function AdminPendingOrders() {
               ? selectedOrder.deliveryBoy
               : selectedOrder.deliveryBoy &&
                 typeof selectedOrder.deliveryBoy === "object"
-              ? (selectedOrder.deliveryBoy as any)._id || undefined
-              : undefined
+                ? (selectedOrder.deliveryBoy as any)._id || undefined
+                : undefined
           }
           onAssignSuccess={async () => {
             // Refresh orders after successful assignment

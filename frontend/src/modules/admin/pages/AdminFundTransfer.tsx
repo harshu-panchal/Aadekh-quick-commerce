@@ -350,11 +350,10 @@ export default function AdminFundTransfer() {
                     <td className="px-4 sm:px-6 py-3 text-sm text-neutral-900">₹{transfer.closingBalance.toFixed(2)}</td>
                     <td className="px-4 sm:px-6 py-3 text-sm text-neutral-900 font-medium">₹{transfer.amount.toFixed(2)}</td>
                     <td className="px-4 sm:px-6 py-3">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        transfer.type === 'Credit' 
-                          ? 'bg-green-100 text-green-800' 
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${transfer.type === 'Credit'
+                          ? 'bg-green-100 text-green-800'
                           : 'bg-red-100 text-red-800'
-                      }`}>
+                        }`}>
                         {transfer.type}
                       </span>
                     </td>
@@ -376,11 +375,10 @@ export default function AdminFundTransfer() {
             <button
               onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
               disabled={currentPage === 1 || totalPages === 0}
-              className={`p-2 border border-neutral-300 rounded ${
-                currentPage === 1 || totalPages === 0
+              className={`p-2 border border-neutral-300 rounded ${currentPage === 1 || totalPages === 0
                   ? 'text-neutral-400 cursor-not-allowed bg-neutral-50'
                   : 'text-neutral-700 hover:bg-neutral-50'
-              }`}
+                }`}
               aria-label="Previous page"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -390,11 +388,10 @@ export default function AdminFundTransfer() {
             <button
               onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages || totalPages === 0}
-              className={`p-2 border border-neutral-300 rounded ${
-                currentPage === totalPages || totalPages === 0
+              className={`p-2 border border-neutral-300 rounded ${currentPage === totalPages || totalPages === 0
                   ? 'text-neutral-400 cursor-not-allowed bg-neutral-50'
                   : 'text-neutral-700 hover:bg-neutral-50'
-              }`}
+                }`}
               aria-label="Next page"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -409,7 +406,7 @@ export default function AdminFundTransfer() {
       <div className="text-center text-sm text-neutral-500 py-4">
         Copyright © 2025. Developed By{' '}
         <a href="#" className="text-teal-600 hover:text-teal-700">
-          Aadekh - 10 Minute App
+          Grihinee - 10 Minute App
         </a>
       </div>
     </div>

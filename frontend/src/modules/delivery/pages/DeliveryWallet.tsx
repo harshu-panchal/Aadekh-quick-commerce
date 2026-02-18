@@ -122,7 +122,7 @@ export default function DeliveryWallet() {
                 key: razorpayKey,
                 amount: amount * 100,
                 currency: "INR",
-                name: "Kosil Admin Payout",
+                name: "Grihinee Admin Payout",
                 description: "Settling collected COD cash",
                 order_id: razorpayOrderId,
                 prefill: {
@@ -317,8 +317,8 @@ export default function DeliveryWallet() {
                             }}
                             disabled={pendingAdminPayout <= 0}
                             className={`mt-4 w-full py-2 rounded-lg text-xs font-bold transition-all ${pendingAdminPayout > 0
-                                    ? "bg-orange-600 text-white hover:bg-orange-700 active:scale-95 shadow-lg shadow-orange-200"
-                                    : "bg-neutral-100 text-neutral-400 cursor-not-allowed"
+                                ? "bg-orange-600 text-white hover:bg-orange-700 active:scale-95 shadow-lg shadow-orange-200"
+                                : "bg-neutral-100 text-neutral-400 cursor-not-allowed"
                                 }`}>
                             Pay to Admin
                         </button>

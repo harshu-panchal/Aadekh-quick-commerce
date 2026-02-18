@@ -102,8 +102,8 @@ export default function Login() {
             <div className="relative mb-2 group">
               <div className="absolute inset-0 bg-white/20 rounded-full blur-xl transform group-hover:scale-110 transition-transform duration-500" />
               <img
-                src="/assets/aadekh_logo-removebg-preview.png"
-                alt="Aadekh"
+                src="/assets/grihinee-logo.png"
+                alt="Grihinee"
                 className="h-40 w-auto object-contain relative z-10 drop-shadow-lg transform hover:scale-105 transition-transform duration-300"
               />
             </div>

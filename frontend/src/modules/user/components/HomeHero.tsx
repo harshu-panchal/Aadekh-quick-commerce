@@ -365,7 +365,7 @@ export default function HomeHero({
             <div className="flex-1 pr-2">
               {/* Service name - small, dark */}
               <div className="text-neutral-800 font-medium text-[10px] md:text-xs mb-0 leading-tight">
-                Aadekh E-Commerce
+                Grihinee E-Commerce
               </div>
               {/* Delivery time - large, bold, dark grey/black */}
               <div className="text-neutral-900 font-extrabold text-2xl md:text-xl mb-0 md:mb-0.5 leading-tight">
@@ -461,13 +461,12 @@ export default function HomeHero({
                 return (
                   <div
                     key={suggestion}
-                    className={`absolute inset-0 flex items-center transition-all duration-500 ${
-                      isActive
+                    className={`absolute inset-0 flex items-center transition-all duration-500 ${isActive
                         ? "translate-y-0 opacity-100"
                         : isPrev
                           ? "-translate-y-full opacity-0"
                           : "translate-y-full opacity-0"
-                    }`}>
+                      }`}>
                     <span
                       className={`text-xs md:text-xs`}
                       style={{

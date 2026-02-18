@@ -79,7 +79,6 @@ const PaymentSchema = new Schema<IPayment>(
       trim: true,
       unique: true,
       sparse: true,
-      index: true
     },
     paymentId: {
       type: String,

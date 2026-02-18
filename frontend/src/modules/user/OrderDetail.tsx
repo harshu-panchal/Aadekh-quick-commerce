@@ -337,9 +337,8 @@ const PromoCarousel = () => {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentSlide ? "bg-green-600 w-4" : "bg-gray-300"
-            }`}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide ? "bg-green-600 w-4" : "bg-gray-300"
+              }`}
           />
         ))}
       </div>
@@ -371,11 +370,10 @@ const TipSection = () => {
               setSelectedTip(tip);
               setCustomTip("");
             }}
-            className={`flex-1 py-2 px-3 rounded-lg border-2 text-sm font-medium transition-all ${
-              selectedTip === tip
-                ? "border-green-600 bg-green-50 text-green-700"
-                : "border-gray-200 text-gray-700 hover:border-gray-300"
-            }`}
+            className={`flex-1 py-2 px-3 rounded-lg border-2 text-sm font-medium transition-all ${selectedTip === tip
+              ? "border-green-600 bg-green-50 text-green-700"
+              : "border-gray-200 text-gray-700 hover:border-gray-300"
+              }`}
             whileTap={{ scale: 0.95 }}>
             ₹{tip}
           </motion.button>
@@ -384,11 +382,10 @@ const TipSection = () => {
           onClick={() => {
             setSelectedTip("other");
           }}
-          className={`flex-1 py-2 px-3 rounded-lg border-2 text-sm font-medium transition-all ${
-            selectedTip === "other"
-              ? "border-green-600 bg-green-50 text-green-700"
-              : "border-gray-200 text-gray-700 hover:border-gray-300"
-          }`}
+          className={`flex-1 py-2 px-3 rounded-lg border-2 text-sm font-medium transition-all ${selectedTip === "other"
+            ? "border-green-600 bg-green-50 text-green-700"
+            : "border-gray-200 text-gray-700 hover:border-gray-300"
+            }`}
           whileTap={{ scale: 0.95 }}>
           Other
         </motion.button>
@@ -635,9 +632,8 @@ export default function OrderDetail() {
   const handleShare = async () => {
     const shareData = {
       title: `Order #${order?.id?.split("-").slice(-1)[0]}`,
-      text: `Track my Aadekh order: Order #${
-        order?.id?.split("-").slice(-1)[0]
-      }`,
+      text: `Track my Grihinee order: Order #${order?.id?.split("-").slice(-1)[0]
+        }`,
       url: window.location.href,
     };
 
@@ -857,7 +853,7 @@ export default function OrderDetail() {
               <ArrowLeftIcon className="w-6 h-6" />
             </motion.button>
           </Link>
-          <h2 className="font-semibold text-lg">Aadekh</h2>
+          <h2 className="font-semibold text-lg">Grihinee</h2>
           <motion.button
             className="w-10 h-10 flex items-center justify-center"
             whileTap={{ scale: 0.9 }}
@@ -941,22 +937,22 @@ export default function OrderDetail() {
             }}
             routeWaypoints={
               order?.status === "Picked up" ||
-              order?.status === "Out for Delivery"
+                order?.status === "Out for Delivery"
                 ? []
                 : sellerLocations.map((s) => ({
-                    lat: s.latitude,
-                    lng: s.longitude,
-                  }))
+                  lat: s.latitude,
+                  lng: s.longitude,
+                }))
             }
             destinationName={
               order?.status === "Picked up" ||
-              order?.status === "Out for Delivery"
+                order?.status === "Out for Delivery"
                 ? order?.deliveryAddress?.address?.split(",")[0] ||
-                  order?.address?.split(",")[0] ||
-                  "Delivery Address"
+                order?.address?.split(",")[0] ||
+                "Delivery Address"
                 : sellerLocations.length > 0
-                ? "Sellers & Delivery Address"
-                : "Delivery Address"
+                  ? "Sellers & Delivery Address"
+                  : "Delivery Address"
             }
             onRouteInfoUpdate={setRouteInfo}
             lastUpdate={lastUpdate}
@@ -1073,9 +1069,8 @@ export default function OrderDetail() {
           transition={{ delay: 0.7 }}>
           <SectionItem
             icon={PhoneIcon}
-            title={`${order.address?.name || "Customer"}, ${
-              order.address?.phone || "9XXXXXXXX"
-            }`}
+            title={`${order.address?.name || "Customer"}, ${order.address?.phone || "9XXXXXXXX"
+              }`}
             subtitle="Delivery partner may call this number"
           />
           <SectionItem
@@ -1106,7 +1101,7 @@ export default function OrderDetail() {
               <span className="text-2xl">🛒</span>
             </div>
             <div className="flex-1">
-              <p className="font-semibold text-gray-900">Aadekh Store</p>
+              <p className="font-semibold text-gray-900">Grihinee Store</p>
               <p className="text-sm text-gray-500">
                 {order.address?.city || "Local Area"}
               </p>

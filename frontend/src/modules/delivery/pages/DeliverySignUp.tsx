@@ -260,11 +260,16 @@ export default function DeliverySignUp() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 to-green-50 flex flex-col items-center justify-center px-4 py-8">
+    <div className="min-h-screen relative flex flex-col items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-[#0f2e20] via-[#1a4a33] to-[#0c831f]">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-green-500/20 blur-[100px] animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-teal-400/20 blur-[120px] animate-pulse delay-700" />
+      <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] rounded-full bg-emerald-400/10 blur-[80px]" />
+
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-4 left-4 z-10 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-neutral-50 transition-colors"
+        className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-95"
         aria-label="Back">
         <svg
           width="20"
@@ -278,39 +283,35 @@ export default function DeliverySignUp() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            style={{ color: "black" }}
           />
         </svg>
       </button>
 
-      {/* Sign Up Card */}
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
-        {/* Header Section */}
-        <div
-          className="px-6 py-4 text-center border-b border-green-700"
-          style={{
-            backgroundColor: "rgb(21 178 74 / var(--tw-bg-opacity, 1))",
-          }}>
-          <div className="mb-0 -mt-4">
+      {/* Glassmorphism Card */}
+      <div className="w-full max-w-sm relative z-10 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] overflow-hidden animate-fade-in-up">
+        {/* Logo/Header Section */}
+        <div className="p-6 pb-0 relative text-center">
+          <div className="relative mb-2 group inline-block">
+            <div className="absolute inset-0 bg-white/20 rounded-full blur-xl transform group-hover:scale-110 transition-transform duration-500" />
             <img
-              src="/assets/kosil1.png"
-              alt="Kosil"
-              className="h-44 w-full max-w-xs mx-auto object-fill object-bottom"
+              src="/assets/grihinee-logo.png"
+              alt="Grihinee"
+              className="h-32 w-auto object-contain relative z-10 drop-shadow-lg transform hover:scale-105 transition-transform duration-300"
             />
           </div>
-          <h1 className="text-2xl font-bold text-white mb-1 -mt-12">
+          <h1 className="text-xl font-bold text-white tracking-tight -mt-4">
             Delivery Sign Up
           </h1>
-          <p className="text-green-50 text-sm -mt-2">
+          <p className="text-green-100/80 text-xs font-medium mb-4">
             Create your delivery partner account
           </p>
         </div>
 
-        {/* Sign Up Form */}
+        {/* Scrollable Form Area */}
         <div
-          className="p-6 space-y-4 delivery-signup-form"
+          className="p-6 pt-0 space-y-4 delivery-signup-form"
           style={{
-            maxHeight: "70vh",
+            maxHeight: "60vh",
             overflowY: "auto",
             scrollbarWidth: "none",
             msOverflowStyle: "none",
@@ -324,138 +325,112 @@ export default function DeliverySignUp() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Personal Information */}
               <div className="space-y-4">
-                <h3 className="text-sm font-semibold text-neutral-700 border-b pb-2">
+                <h3 className="text-xs font-bold text-green-300/80 border-b border-white/10 pb-1 uppercase tracking-wider">
                   Personal Information
                 </h3>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Name <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Enter your full name"
-                    required
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
-                    disabled={loading}
-                  />
-                </div>
+                <div className="space-y-3">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Full Name *"
+                      required
+                      className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
+                      disabled={loading}
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Mobile Number <span className="text-red-500">*</span>
-                  </label>
-                  <div className="flex items-center bg-white border border-neutral-300 rounded-lg overflow-hidden focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-200">
-                    <div className="px-3 py-2.5 text-sm font-medium text-neutral-600 border-r border-neutral-300 bg-neutral-50">
-                      +91
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+                      <span className="text-white/60 font-medium pr-2 border-r border-white/20 text-xs">
+                        +91
+                      </span>
                     </div>
                     <input
                       type="tel"
                       name="mobile"
                       value={formData.mobile}
                       onChange={handleInputChange}
-                      placeholder="Enter mobile number"
+                      placeholder="Mobile Number *"
                       required
                       maxLength={10}
-                      className="flex-1 px-3 py-2.5 text-sm placeholder:text-neutral-400 focus:outline-none"
+                      className="w-full pl-12 pr-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
                       disabled={loading}
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Email <span className="text-red-500">*</span>
-                  </label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    placeholder="Enter email address"
+                    placeholder="Email Address *"
                     required
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
                     disabled={loading}
                   />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Date of Birth
-                  </label>
-                  <input
-                    type="date"
-                    name="dateOfBirth"
-                    value={formData.dateOfBirth}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
-                    disabled={loading}
-                  />
-                </div>
+                  <div className="relative">
+                    <label className="block text-[10px] text-white/50 mb-1 ml-1 uppercase tracking-widest">Date of Birth</label>
+                    <input
+                      type="date"
+                      name="dateOfBirth"
+                      value={formData.dateOfBirth}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner [color-scheme:dark]"
+                      disabled={loading}
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Password <span className="text-red-500">*</span>
-                  </label>
                   <input
                     type="password"
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    placeholder="Enter password (min 6 characters)"
+                    placeholder="Password (min 6 chars) *"
                     required
                     minLength={4}
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
                     disabled={loading}
                   />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Address <span className="text-red-500">*</span>
-                  </label>
                   <input
                     type="text"
                     name="address"
                     value={formData.address}
                     onChange={handleInputChange}
-                    placeholder="Enter your address"
+                    placeholder="Address *"
                     required
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
                     disabled={loading}
                   />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    City <span className="text-red-500">*</span>
-                  </label>
                   <div className="relative">
                     <input
                       type="text"
                       name="city"
                       value={formData.city}
                       onChange={handleInputChange}
-                      placeholder="Enter your city"
+                      placeholder="City *"
                       required
-                      className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                      className="w-full pr-12 pl-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
                       disabled={loading || isCityLoading}
                     />
                     <button
                       type="button"
                       onClick={fetchCityFromLocation}
                       disabled={isCityLoading || loading}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-teal-600 hover:bg-teal-50 rounded-md transition-colors disabled:text-neutral-400"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-green-400 hover:bg-white/10 rounded-full transition-colors disabled:text-neutral-600"
                       title="Fetch current location">
                       {isCityLoading ? (
-                        <div className="w-4 h-4 border-2 border-teal-600 border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-4 h-4 border-2 border-green-400 border-t-transparent rounded-full animate-spin"></div>
                       ) : (
                         <svg
-                          width="18"
-                          height="18"
+                          width="16"
+                          height="16"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
@@ -466,162 +441,121 @@ export default function DeliverySignUp() {
                       )}
                     </button>
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Pincode
-                  </label>
                   <input
                     type="text"
                     name="pincode"
                     value={formData.pincode}
                     onChange={handleInputChange}
-                    placeholder="Enter pincode"
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    placeholder="Pincode"
+                    className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
                     disabled={loading}
                   />
                 </div>
               </div>
 
               {/* Bank Information */}
-              <div className="space-y-4 pt-4 border-t">
-                <h3 className="text-sm font-semibold text-neutral-700 border-b pb-2">
-                  Bank Account Information (Optional)
+              <div className="space-y-4 pt-2">
+                <h3 className="text-xs font-bold text-green-300/80 border-b border-white/10 pb-1 uppercase tracking-wider">
+                  Bank Details (Optional)
                 </h3>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Account Name
-                  </label>
+                <div className="space-y-3">
                   <input
                     type="text"
                     name="accountName"
                     value={formData.accountName}
                     onChange={handleInputChange}
-                    placeholder="Account holder name"
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    placeholder="Account Name"
+                    className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
                     disabled={loading}
                   />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Bank Name
-                  </label>
                   <input
                     type="text"
                     name="bankName"
                     value={formData.bankName}
                     onChange={handleInputChange}
-                    placeholder="Bank name"
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    placeholder="Bank Name"
+                    className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
                     disabled={loading}
                   />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Account Number
-                  </label>
                   <input
                     type="text"
                     name="accountNumber"
                     value={formData.accountNumber}
                     onChange={handleInputChange}
-                    placeholder="Account number"
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    placeholder="Account Number"
+                    className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
                     disabled={loading}
                   />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    IFSC Code
-                  </label>
                   <input
                     type="text"
                     name="ifscCode"
                     value={formData.ifscCode}
                     onChange={handleInputChange}
-                    placeholder="IFSC code"
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                    placeholder="IFSC Code"
+                    className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide shadow-inner"
                     disabled={loading}
                   />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Bonus Type
-                  </label>
-                  <select
-                    name="bonusType"
-                    value={formData.bonusType}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
-                    disabled={loading}>
-                    {bonusTypes.map((type) => (
-                      <option
-                        key={type}
-                        value={type === "Select Bonus Type" ? "" : type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <label className="block text-[10px] text-white/50 mb-1 ml-1 uppercase tracking-widest">Bonus Type</label>
+                    <select
+                      name="bonusType"
+                      value={formData.bonusType}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/10 text-white focus:outline-none focus:border-green-400/50 focus:bg-black/30 transition-all font-medium text-sm tracking-wide [color-scheme:dark]"
+                      disabled={loading}>
+                      {bonusTypes.map((type) => (
+                        <option
+                          key={type}
+                          value={type === "Select Bonus Type" ? "" : type}>
+                          {type}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
               </div>
 
               {/* Documents Section */}
-              <div className="space-y-4 pt-4 border-t">
-                <h3 className="text-sm font-semibold text-neutral-700 border-b pb-2">
-                  Documents (Optional - Can be uploaded later)
+              <div className="space-y-4 pt-2">
+                <h3 className="text-xs font-bold text-green-300/80 border-b border-white/10 pb-1 uppercase tracking-wider">
+                  Documents (Optional)
                 </h3>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Driving License
-                  </label>
-                  <div className="space-y-2">
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-[10px] text-white/50 mb-1 ml-1 uppercase tracking-widest">Driving License</label>
                     <input
                       type="file"
                       name="drivingLicense"
                       onChange={handleFileChange}
                       accept="image/*,.pdf"
-                      className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                      className="w-full px-3 py-2 text-xs rounded-xl bg-black/20 border border-white/10 text-white/70 file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-[10px] file:font-semibold file:bg-green-500/20 file:text-green-400 hover:file:bg-green-500/30"
                       disabled={loading || uploadingDocs}
                     />
-                    {drivingLicenseFile && (
-                      <p className="text-xs text-neutral-600">
-                        {drivingLicenseFile.name}
-                      </p>
-                    )}
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    National Identity Card
-                  </label>
-                  <div className="space-y-2">
+                  <div>
+                    <label className="block text-[10px] text-white/50 mb-1 ml-1 uppercase tracking-widest">National ID Card</label>
                     <input
                       type="file"
                       name="nationalIdentityCard"
                       onChange={handleFileChange}
                       accept="image/*,.pdf"
-                      className="w-full px-3 py-2.5 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-200"
+                      className="w-full px-3 py-2 text-xs rounded-xl bg-black/20 border border-white/10 text-white/70 file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-[10px] file:font-semibold file:bg-green-500/20 file:text-green-400 hover:file:bg-green-500/30"
                       disabled={loading || uploadingDocs}
                     />
-                    {nationalIdentityCardFile && (
-                      <p className="text-xs text-neutral-600">
-                        {nationalIdentityCardFile.name}
-                      </p>
-                    )}
                   </div>
                 </div>
               </div>
 
               {error && (
-                <div className="text-sm text-red-600 bg-red-50 p-2 rounded text-center">
+                <div className="p-2 bg-red-500/20 border border-red-500/30 backdrop-blur-sm text-red-100 text-[10px] rounded-lg text-center animate-shake">
                   {error}
                 </div>
               )}
@@ -629,25 +563,36 @@ export default function DeliverySignUp() {
               <button
                 type="submit"
                 disabled={loading || uploadingDocs}
-                className={`w-full py-2.5 rounded-lg font-semibold text-sm transition-colors ${!loading && !uploadingDocs
-                  ? "bg-teal-600 text-white hover:bg-teal-700 shadow-md"
-                  : "bg-neutral-300 text-neutral-500 cursor-not-allowed"
+                className={`w-full py-3 rounded-xl font-bold text-sm tracking-wide transition-all shadow-lg overflow-hidden relative group ${!loading && !uploadingDocs
+                  ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:shadow-green-500/40 hover:scale-[1.02] active:scale-[0.98]"
+                  : "bg-white/10 text-white/30 cursor-not-allowed border border-white/5"
                   }`}>
-                {uploadingDocs
-                  ? "Uploading Documents..."
-                  : loading
-                    ? "Creating Account..."
-                    : "Sign Up"}
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none" />
+                <span className="relative flex items-center justify-center gap-2">
+                  {uploadingDocs ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>Uploading...</span>
+                    </>
+                  ) : loading ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>Creating...</span>
+                    </>
+                  ) : (
+                    "Create Account"
+                  )}
+                </span>
               </button>
 
               {/* Login Link */}
-              <div className="text-center pt-2 border-t border-neutral-200">
-                <p className="text-sm text-neutral-600">
-                  Already have a delivery partner account?{" "}
+              <div className="text-center pt-1 border-t border-white/10">
+                <p className="text-xs text-white/60">
+                  Already have a partner account?{" "}
                   <button
                     type="button"
                     onClick={() => navigate("/delivery/login")}
-                    className="text-teal-600 hover:text-teal-700 font-semibold">
+                    className="text-white hover:text-green-300 font-semibold hover:underline transition-colors">
                     Login
                   </button>
                 </p>
@@ -655,32 +600,40 @@ export default function DeliverySignUp() {
             </form>
           ) : (
             /* OTP Verification Form */
-            <div className="space-y-4">
-              <div className="text-center">
-                <p className="text-sm text-neutral-600 mb-2">
-                  Enter the 4-digit OTP sent via voice call to
-                </p>
-                <p className="text-sm font-semibold text-neutral-800">
-                  +91 {formData.mobile}
+            <div className="space-y-5 animate-fade-in">
+              <div className="text-center space-y-1">
+                <h1 className="text-xl font-bold text-white tracking-tight">
+                  Verify Account
+                </h1>
+                <p className="text-xs text-green-100/80">
+                  Enter the 4-digit code sent to
+                  <br />
+                  <span className="font-semibold text-white text-base tracking-wider">
+                    +91 {formData.mobile}
+                  </span>
                 </p>
               </div>
 
-              <OTPInput onComplete={handleOTPComplete} disabled={loading} />
+              <div className="flex justify-center py-2">
+                <div className="bg-white/5 p-3 rounded-xl border border-white/10 backdrop-blur-sm">
+                  <OTPInput onComplete={handleOTPComplete} disabled={loading} />
+                </div>
+              </div>
 
               {error && (
-                <div className="text-sm text-red-600 bg-red-50 p-2 rounded text-center">
+                <div className="p-2 bg-red-500/20 border border-red-500/30 backdrop-blur-sm text-red-100 text-[10px] rounded-lg text-center animate-shake">
                   {error}
                 </div>
               )}
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 pt-1">
                 <button
                   onClick={() => {
                     setShowOTP(false);
                     setError("");
                   }}
                   disabled={loading}
-                  className="flex-1 py-2.5 rounded-lg font-semibold text-sm bg-neutral-100 text-neutral-700 hover:bg-neutral-200 transition-colors border border-neutral-300">
+                  className="flex-1 py-2.5 rounded-lg text-xs font-semibold text-white/70 hover:text-white hover:bg-white/10 border border-white/10 transition-all active:scale-95">
                   Back
                 </button>
                 <button
@@ -697,19 +650,21 @@ export default function DeliverySignUp() {
                     }
                   }}
                   disabled={loading}
-                  className="flex-1 py-2.5 rounded-lg font-semibold text-sm bg-teal-600 text-white hover:bg-teal-700 transition-colors">
+                  className="flex-1 py-2.5 rounded-lg text-xs font-semibold text-green-400 hover:text-green-300 hover:bg-green-500/10 border border-green-500/20 transition-all active:scale-95">
                   {loading ? "Calling..." : "Resend OTP"}
                 </button>
               </div>
             </div>
           )}
         </div>
-      </div>
 
-      {/* Footer Text */}
-      <p className="mt-6 text-xs text-neutral-500 text-center max-w-md">
-        By continuing, you agree to Kosil's Terms of Service and Privacy Policy
-      </p>
+        {/* Footer */}
+        <div className="px-6 py-3 bg-black/20 border-t border-white/10 text-center backdrop-blur-md">
+          <p className="text-[9px] text-white/50 leading-relaxed uppercase tracking-wider">
+            By continuing, you agree to Grihinee's Terms and Conditions
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

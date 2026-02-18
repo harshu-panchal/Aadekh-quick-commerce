@@ -39,12 +39,12 @@ export default function AboutUs() {
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-24 h-24 mb-4">
             <img
-              src="/assets/aadekh_logo-removebg-preview.png"
-              alt="Aadekh Logo"
+              src="/assets/grihinee-logo.png"
+              alt="Grihinee Logo"
               className="w-full h-full object-contain"
             />
           </div>
-          <h2 className="text-3xl font-bold text-neutral-900 mb-2">Aadekh</h2>
+          <h2 className="text-3xl font-bold text-neutral-900 mb-2">Grihinee</h2>
           <p className="text-sm text-neutral-600">
             Your Trusted Delivery Partner
           </p>
@@ -78,7 +78,7 @@ export default function AboutUs() {
             Our Mission
           </h3>
           <p className="text-sm text-neutral-700 leading-relaxed">
-            At Aadekh, we're committed to revolutionizing the way you shop and
+            At Grihinee, we're committed to revolutionizing the way you shop and
             receive your products. Our mission is to provide lightning-fast
             delivery services while maintaining the highest standards of quality
             and customer satisfaction.
@@ -122,7 +122,7 @@ export default function AboutUs() {
             What We Do
           </h3>
           <p className="text-sm text-neutral-700 leading-relaxed mb-4">
-            Aadekh is a comprehensive e-commerce platform that connects customers
+            Grihinee is a comprehensive e-commerce platform that connects customers
             with a wide range of products across multiple categories including
             groceries, fashion, electronics, pharmacy, and much more.
           </p>
@@ -315,7 +315,7 @@ export default function AboutUs() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span className="text-neutral-700">support@aadekh.com</span>
+              <span className="text-neutral-700">support@grihinee.com</span>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <svg
@@ -369,7 +369,7 @@ export default function AboutUs() {
         <div className="mt-8 text-center">
           <p className="text-xs text-neutral-500">Version 1.0.0</p>
           <p className="text-xs text-neutral-500 mt-1">
-            © 2024 Aadekh. All rights reserved.
+            © 2024 Grihinee. All rights reserved.
           </p>
         </div>
       </div>

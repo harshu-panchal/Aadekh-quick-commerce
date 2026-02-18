@@ -81,7 +81,7 @@ export default function AdminAllOrders() {
         console.error("Error fetching orders:", err);
         setError(
           err.response?.data?.message ||
-            "Failed to load orders. Please try again."
+          "Failed to load orders. Please try again."
         );
       } finally {
         setLoading(false);
@@ -775,8 +775,8 @@ export default function AdminAllOrders() {
                       <td className="px-4 sm:px-6 py-3 text-sm text-neutral-600">
                         {order.estimatedDeliveryDate
                           ? new Date(
-                              order.estimatedDeliveryDate
-                            ).toLocaleDateString()
+                            order.estimatedDeliveryDate
+                          ).toLocaleDateString()
                           : "-"}
                       </td>
                       <td className="px-4 sm:px-6 py-3 text-sm text-neutral-600">
@@ -899,7 +899,7 @@ export default function AdminAllOrders() {
       <div className="text-center py-4 text-xs sm:text-sm text-neutral-600">
         Copyright © 2025. Developed By{" "}
         <Link to="/" className="text-blue-600 hover:text-blue-700">
-          Aadekh - 10 Minute App
+          Grihinee - 10 Minute App
         </Link>
       </div>
     </div>

@@ -96,7 +96,7 @@ export default function AdminManageDeliveryBoy() {
             'available': 'available',
         };
         const backendColumn = columnMap[column] || column;
-        
+
         if (sortColumn === backendColumn) {
             setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
         } else {
@@ -279,7 +279,7 @@ export default function AdminManageDeliveryBoy() {
             'available': 'available',
         };
         const backendColumn = columnMap[column] || column;
-        
+
         return (
             <span className="text-neutral-400 text-xs ml-1">
                 {sortColumn === backendColumn ? (sortDirection === 'asc' ? '↑' : '↓') : '⇅'}
@@ -706,7 +706,7 @@ export default function AdminManageDeliveryBoy() {
             {/* Footer */}
             <footer className="text-center py-4 text-sm text-neutral-600 border-t border-neutral-200 bg-white">
                 Copyright © 2025. Developed By{' '}
-                <a href="#" className="text-blue-600 hover:underline">Aadekh - 10 Minute App</a>
+                <a href="#" className="text-blue-600 hover:underline">Grihinee - 10 Minute App</a>
             </footer>
         </div>
     );

@@ -67,7 +67,7 @@ export default function SellerHeader({
     <header className="bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-30">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-3 sm:px-4 md:px-6 py-3 sm:py-4 gap-3 sm:gap-0">
         {/* Logo and Hamburger Menu */}
-        <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
+        <div className="flex items-center gap-0 w-full sm:w-auto">
           {/* Hamburger Menu Button */}
           <button
             onClick={onMenuClick}
@@ -105,13 +105,13 @@ export default function SellerHeader({
               </svg>
             )}
           </button>
-          {/* Aadekh Logo */}
+          {/* Grihinee Logo */}
           <button
             onClick={handleLogoClick}
-            className="hover:opacity-80 transition-opacity">
+            className="hover:opacity-80 transition-opacity -ml-4 sm:-ml-2">
             <img
-              src="/assets/aadekh_logo-removebg-preview.png"
-              alt="Aadekh"
+              src="/assets/grihinee-logo.png"
+              alt="Grihinee"
               className="h-24 sm:h-28 w-auto object-contain cursor-pointer -my-6 sm:-my-8 relative z-50"
               style={{ maxWidth: "none" }}
             />
