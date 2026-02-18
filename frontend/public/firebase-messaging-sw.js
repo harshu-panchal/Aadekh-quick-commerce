@@ -2,14 +2,16 @@
 importScripts('https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.9.0/firebase-messaging-compat.js');
 
+// Extract config from URL parameters
+const urlParams = new URLSearchParams(location.search);
 const firebaseConfig = {
-    apiKey: "AIzaSyCGGEeLFXSt0TScXaPnzhOQRE3icZqxf4M",
-    authDomain: "kosil-e-com.firebaseapp.com",
-    projectId: "kosil-e-com",
-    storageBucket: "kosil-e-com.firebasestorage.app",
-    messagingSenderId: "277843928493",
-    appId: "1:277843928493:web:02b318e1002498016e6d24",
-    measurementId: "G-QY6BQ2GDYB"
+    apiKey: urlParams.get('apiKey'),
+    authDomain: urlParams.get('authDomain'),
+    projectId: urlParams.get('projectId'),
+    storageBucket: urlParams.get('storageBucket'),
+    messagingSenderId: urlParams.get('messagingSenderId'),
+    appId: urlParams.get('appId'),
+    measurementId: urlParams.get('measurementId')
 };
 
 // Initialize Firebase

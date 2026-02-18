@@ -25,7 +25,7 @@ const enableDynamicDelivery = async () => {
 
             settings.deliveryConfig = {
                 isDistanceBased: true,
-                googleMapsKey: 'AIzaSyC2UW5-Nt9KidxOfBRrZImeBRh9SOMGluo',
+                googleMapsKey: process.env.GOOGLE_MAPS_API_KEY || '',
                 baseCharge: 30,
                 baseDistance: 2,
                 kmRate: 10,
@@ -50,7 +50,7 @@ const enableDynamicDelivery = async () => {
                 contactPhone: "1234567890",
                 deliveryConfig: {
                     isDistanceBased: true,
-                    googleMapsKey: 'AIzaSyC2UW5-Nt9KidxOfBRrZImeBRh9SOMGluo',
+                    googleMapsKey: process.env.GOOGLE_MAPS_API_KEY || '',
                     baseCharge: 30,
                     baseDistance: 2,
                     kmRate: 10,
