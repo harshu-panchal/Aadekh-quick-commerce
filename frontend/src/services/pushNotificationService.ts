@@ -194,12 +194,12 @@ export function setupForegroundNotificationHandler(handler?: (payload: any) => v
         // while the user is actively using the app.
         if (Notification.permission === 'granted' && payload.notification) {
             const { title, body } = payload.notification;
-            const notificationTitle = title || 'Kosil Notification';
+            const notificationTitle = title || 'Grihinee Notification';
             const notificationOptions = {
                 body: body,
                 icon: '/favicon.ico',
                 badge: '/favicon.ico',
-                tag: payload.data?.type || 'kosil-general',
+                tag: payload.data?.type || 'grihinee-general',
                 data: payload.data
             };
 
