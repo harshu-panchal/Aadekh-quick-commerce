@@ -272,15 +272,20 @@ export default function SellerProductList() {
   return (
     <div className="flex flex-col h-full">
       {/* Page Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold text-neutral-800">
-          Product List
-        </h1>
-        <div className="text-sm text-blue-500">
-          <span className="cursor-pointer hover:underline">Home</span>{" "}
-          <span className="text-neutral-400">/</span>{" "}
-          <span className="text-neutral-600">Dashboard</span>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-xl font-bold text-gray-800">
+            Product Inventory
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">Manage your storefront items</p>
         </div>
+        <button
+          onClick={() => navigate("/seller/product/add")}
+          className="bg-teal-600 hover:bg-teal-700 text-white p-2.5 sm:px-4 sm:py-2 rounded-xl transition-all shadow-lg shadow-teal-100 flex items-center gap-2 active:scale-95"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14" /></svg>
+          <span className="hidden sm:inline text-sm font-black tracking-widest">Add Product</span>
+        </button>
       </div>
 
       {/* Content Card */}
@@ -290,147 +295,105 @@ export default function SellerProductList() {
         </div>
 
         {/* Filters and Controls */}
-        <div className="p-4 flex flex-col sm:flex-row flex-wrap gap-4 items-start sm:items-center justify-between border-b border-neutral-100">
-          <div className="flex flex-wrap gap-3">
-            <div>
-              <label className="block text-xs text-neutral-600 mb-1">
-                Filter By Category
-              </label>
+        <div className="p-4 border-b border-neutral-100">
+          <div className="flex flex-col gap-4">
+            {/* Search & Export Row */}
+            <div className="flex items-center gap-2">
+              <div className="relative flex-1">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                </span>
+                <input
+                  type="text"
+                  className="w-full pl-10 pr-4 py-2 bg-neutral-100 border-none rounded-lg text-sm focus:ring-2 focus:ring-teal-500"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Search products..."
+                />
+              </div>
+              <button
+                onClick={() => {
+                  const headers = [
+                    "Product Id",
+                    "Variation Id",
+                    "Product Name",
+                    "Seller Name",
+                    "Brand Name",
+                    "Category",
+                    "Price",
+                    "Disc Price",
+                    "Variation",
+                  ];
+                  const csvContent = [
+                    headers.join(","),
+                    ...filteredVariations.map((v) =>
+                      [
+                        v.productId,
+                        v.variationId,
+                        `"${v.productName}"`,
+                        `"${v.sellerName}"`,
+                        `"${v.brandName}"`,
+                        `"${v.category}"`,
+                        v.price,
+                        v.discPrice,
+                        `"${v.variation}"`,
+                      ].join(",")
+                    ),
+                  ].join("\n");
+                  const blob = new Blob([csvContent], {
+                    type: "text/csv;charset=utf-8;",
+                  });
+                  const link = document.createElement("a");
+                  const url = URL.createObjectURL(blob);
+                  link.setAttribute("href", url);
+                  link.setAttribute(
+                    "download",
+                    `products_${new Date().toISOString().split("T")[0]}.csv`
+                  );
+                  link.style.visibility = "hidden";
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                className="bg-teal-600 hover:bg-teal-700 text-white p-2.5 rounded-lg transition-colors shadow-sm active:scale-95"
+                title="Export Products"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" /></svg>
+              </button>
+            </div>
+
+            {/* Filters Row */}
+            <div className="flex flex-wrap gap-2">
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="bg-white border border-neutral-300 rounded py-1.5 px-3 text-sm focus:ring-1 focus:ring-teal-500 focus:outline-none cursor-pointer">
+                className="flex-1 min-w-[120px] bg-white border border-neutral-300 rounded-lg py-2 px-3 text-xs focus:ring-2 focus:ring-teal-500 focus:outline-none"
+              >
                 <option value="All Category">All Category</option>
                 {categories.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
+                  <option key={cat} value={cat}>{cat}</option>
                 ))}
               </select>
-            </div>
-            <div>
-              <label className="block text-xs text-neutral-600 mb-1">
-                Filter by Status
-              </label>
+
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="bg-white border border-neutral-300 rounded py-1.5 px-3 text-sm focus:ring-1 focus:ring-teal-500 focus:outline-none cursor-pointer">
-                <option value="All Products">All Products</option>
+                className="flex-1 min-w-[110px] bg-white border border-neutral-300 rounded-lg py-2 px-3 text-xs focus:ring-2 focus:ring-teal-500 focus:outline-none"
+              >
+                <option value="All Products">All Status</option>
                 <option value="Published">Published</option>
                 <option value="Unpublished">Unpublished</option>
               </select>
-            </div>
-            <div>
-              <label className="block text-xs text-neutral-600 mb-1">
-                Filter by Stock
-              </label>
-              <select
-                value={stockFilter}
-                onChange={(e) => setStockFilter(e.target.value)}
-                className="bg-white border border-neutral-300 rounded py-1.5 px-3 text-sm focus:ring-1 focus:ring-teal-500 focus:outline-none cursor-pointer">
-                <option value="All Products">All Products</option>
-                <option value="In Stock">In Stock</option>
-                <option value="Out of Stock">Out of Stock</option>
-              </select>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-neutral-600">Show</span>
+
               <select
                 value={rowsPerPage}
                 onChange={(e) => setRowsPerPage(Number(e.target.value))}
-                className="bg-white border border-neutral-300 rounded py-1.5 px-3 text-sm focus:ring-1 focus:ring-teal-500 focus:outline-none cursor-pointer">
+                className="w-16 bg-white border border-neutral-300 rounded-lg py-2 px-2 text-xs focus:ring-2 focus:ring-teal-500 focus:outline-none"
+              >
                 <option value={10}>10</option>
                 <option value={20}>20</option>
                 <option value={50}>50</option>
-                <option value={100}>100</option>
               </select>
-            </div>
-            <button
-              onClick={() => {
-                const headers = [
-                  "Product Id",
-                  "Variation Id",
-                  "Product Name",
-                  "Seller Name",
-                  "Brand Name",
-                  "Category",
-                  "Price",
-                  "Disc Price",
-                  "Variation",
-                ];
-                const csvContent = [
-                  headers.join(","),
-                  ...filteredVariations.map((v) =>
-                    [
-                      v.productId,
-                      v.variationId,
-                      `"${v.productName}"`,
-                      `"${v.sellerName}"`,
-                      `"${v.brandName}"`,
-                      `"${v.category}"`,
-                      v.price,
-                      v.discPrice,
-                      `"${v.variation}"`,
-                    ].join(",")
-                  ),
-                ].join("\n");
-                const blob = new Blob([csvContent], {
-                  type: "text/csv;charset=utf-8;",
-                });
-                const link = document.createElement("a");
-                const url = URL.createObjectURL(blob);
-                link.setAttribute("href", url);
-                link.setAttribute(
-                  "download",
-                  `products_${new Date().toISOString().split("T")[0]}.csv`
-                );
-                link.style.visibility = "hidden";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-              }}
-              className="bg-teal-600 hover:bg-teal-700 text-white px-3 py-1.5 rounded text-sm font-medium flex items-center gap-1 transition-colors">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-              Export
-              <svg
-                width="10"
-                height="10"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="ml-1">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div className="relative">
-              <span className="absolute left-2 top-1/2 -translate-y-1/2 text-neutral-400 text-xs">
-                Search:
-              </span>
-              <input
-                type="text"
-                className="pl-14 pr-3 py-1.5 bg-neutral-100 border-none rounded text-sm focus:ring-1 focus:ring-teal-500 w-48"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder=""
-              />
             </div>
           </div>
         </div>
@@ -455,311 +418,212 @@ export default function SellerProductList() {
           </div>
         )}
 
-        {/* Table */}
+        {/* Table & Cards */}
         {!loading && !error && (
-        <div className="overflow-x-auto flex-1">
-          <table className="w-full text-left border-collapse border border-neutral-200">
-            <thead>
-              <tr className="bg-neutral-50 text-xs font-bold text-neutral-800">
-                <th className="p-4 w-16 border border-neutral-200">
-                  <div className="flex items-center justify-between">
-                    Product Id
-                  </div>
-                </th>
-                <th
-                  className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
-                  onClick={() => handleSort("variationId")}>
-                  <div className="flex items-center justify-between">
-                    Variation Id <SortIcon column="variationId" />
-                  </div>
-                </th>
-                <th
-                  className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
-                  onClick={() => handleSort("productName")}>
-                  <div className="flex items-center justify-between">
-                    Product Name <SortIcon column="productName" />
-                  </div>
-                </th>
-                <th
-                  className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
-                  onClick={() => handleSort("sellerName")}>
-                  <div className="flex items-center justify-between">
-                    Seller Name <SortIcon column="sellerName" />
-                  </div>
-                </th>
-                <th className="p-4 border border-neutral-200">
-                  <div className="flex items-center justify-between">
-                    product Image
-                  </div>
-                </th>
-                <th
-                  className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
-                  onClick={() => handleSort("brandName")}>
-                  <div className="flex items-center justify-between">
-                    Brand Name <SortIcon column="brandName" />
-                  </div>
-                </th>
-                <th
-                  className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
-                  onClick={() => handleSort("category")}>
-                  <div className="flex items-center justify-between">
-                    Category <SortIcon column="category" />
-                  </div>
-                </th>
-                <th
-                  className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
-                  onClick={() => handleSort("subCategory")}>
-                  <div className="flex items-center justify-between">
-                    SubCategory <SortIcon column="subCategory" />
-                  </div>
-                </th>
-                <th
-                  className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
-                  onClick={() => handleSort("price")}>
-                  <div className="flex items-center justify-between">
-                    Price <SortIcon column="price" />
-                  </div>
-                </th>
-                <th
-                  className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
-                  onClick={() => handleSort("discPrice")}>
-                  <div className="flex items-center justify-between">
-                    Disc Price <SortIcon column="discPrice" />
-                  </div>
-                </th>
-                <th
-                  className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
-                  onClick={() => handleSort("variation")}>
-                  <div className="flex items-center justify-between">
-                    Variation <SortIcon column="variation" />
-                  </div>
-                </th>
-                <th className="p-4 border border-neutral-200">
-                  <div className="flex items-center justify-center">Action</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {displayedVariations.map((variation, index) => {
-                const isFirstVariation =
-                  index === 0 ||
-                  displayedVariations[index - 1].productId !==
-                    variation.productId;
-                const product = products.find(
-                  (p) => p._id === variation.productId
-                );
-                const hasMultipleVariations =
-                  product && product.variations.length > 1;
-                const isExpanded = expandedProducts.has(variation.productId);
-
-                return (
-                  <tr
-                    key={`${variation.productId}-${variation.variationId}`}
-                    className="hover:bg-neutral-50 transition-colors text-sm text-neutral-700">
-                    <td className="p-4 align-middle border border-neutral-200">
-                      <div className="flex items-center gap-2">
-                        {isFirstVariation && hasMultipleVariations && (
+          <div className="flex-1 flex flex-col min-h-0">
+            {/* Desktop Table View */}
+            <div className="hidden lg:block overflow-x-auto">
+              <table className="w-full text-left border-collapse border border-neutral-200">
+                <thead>
+                  <tr className="bg-neutral-50 text-xs font-bold text-neutral-800">
+                    <th className="p-4 w-16 border border-neutral-200">
+                      Product Id
+                    </th>
+                    <th
+                      className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
+                      onClick={() => handleSort("variationId")}>
+                      <div className="flex items-center justify-between">
+                        Variation Id <SortIcon column="variationId" />
+                      </div>
+                    </th>
+                    <th
+                      className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
+                      onClick={() => handleSort("productName")}>
+                      <div className="flex items-center justify-between">
+                        Product Name <SortIcon column="productName" />
+                      </div>
+                    </th>
+                    <th className="p-4 border border-neutral-200">
+                      product Image
+                    </th>
+                    <th
+                      className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
+                      onClick={() => handleSort("category")}>
+                      <div className="flex items-center justify-between">
+                        Category <SortIcon column="category" />
+                      </div>
+                    </th>
+                    <th
+                      className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
+                      onClick={() => handleSort("price")}>
+                      <div className="flex items-center justify-between">
+                        Price <SortIcon column="price" />
+                      </div>
+                    </th>
+                    <th
+                      className="p-4 border border-neutral-200 cursor-pointer hover:bg-neutral-100 transition-colors"
+                      onClick={() => handleSort("discPrice")}>
+                      <div className="flex items-center justify-between">
+                        Disc Price <SortIcon column="discPrice" />
+                      </div>
+                    </th>
+                    <th className="p-4 border border-neutral-200 text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {displayedVariations.map((variation) => (
+                    <tr
+                      key={`${variation.productId}-${variation.variationId}`}
+                      className="hover:bg-neutral-50 transition-colors text-sm text-neutral-700">
+                      <td className="p-4 align-middle border border-neutral-200 text-[10px] font-mono">
+                        {variation.productId}
+                      </td>
+                      <td className="p-4 align-middle border border-neutral-200 text-[10px] font-mono">
+                        {variation.variationId}
+                      </td>
+                      <td className="p-4 align-middle border border-neutral-200 font-bold text-neutral-900">
+                        {variation.productName}
+                      </td>
+                      <td className="p-4 border border-neutral-200 text-center">
+                        <div className="w-12 h-12 bg-white border border-neutral-200 rounded p-1 flex items-center justify-center mx-auto shadow-sm">
+                          <img
+                            src={variation.productImage}
+                            alt={variation.productName}
+                            className="max-w-full max-h-full object-contain"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src =
+                                "https://placehold.co/60x40?text=Img";
+                            }}
+                          />
+                        </div>
+                      </td>
+                      <td className="p-4 align-middle border border-neutral-200">
+                        <span className="px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded-full text-[10px] font-bold tracking-wider">
+                          {variation.category}
+                        </span>
+                      </td>
+                      <td className="p-4 align-middle border border-neutral-200 font-bold">
+                        ₹{variation.price.toFixed(2)}
+                      </td>
+                      <td className="p-4 align-middle border border-neutral-200">
+                        {variation.discPrice > 0
+                          ? `₹${variation.discPrice.toFixed(2)}`
+                          : "-"}
+                      </td>
+                      <td className="p-4 align-middle border border-neutral-200">
+                        <div className="flex items-center justify-center gap-2">
                           <button
-                            onClick={() => toggleProduct(variation.productId)}
-                            className="text-blue-600 hover:text-blue-700">
-                            <svg
-                              width="16"
-                              height="16"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round">
-                              {isExpanded ? (
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                              ) : (
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                              )}
-                            </svg>
+                            onClick={() => handleEdit(variation.productId)}
+                            className="p-1.5 text-teal-600 hover:bg-teal-50 rounded transition-colors"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
                           </button>
-                        )}
-                        <span>{variation.productId}</span>
+                          <button
+                            onClick={() => handleDelete(variation.productId)}
+                            className="p-1.5 text-red-600 hover:bg-red-50 rounded transition-colors"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /></svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Card List View */}
+            <div className="lg:hidden p-4 space-y-4">
+              {displayedVariations.length === 0 ? (
+                <div className="py-12 text-center text-neutral-400">
+                  No products found.
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {displayedVariations.map((variation) => (
+                    <div key={`${variation.productId}-${variation.variationId}`} className="bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                      <div className="flex gap-4 p-4">
+                        <div className="w-20 h-20 bg-neutral-50 rounded-lg p-2 flex items-center justify-center flex-shrink-0">
+                          <img
+                            src={variation.productImage}
+                            alt={variation.productName}
+                            className="max-w-full max-h-full object-contain"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = "https://placehold.co/80x80?text=Img";
+                            }}
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-bold text-neutral-900 truncate">{variation.productName}</h4>
+                          <p className="text-[10px] text-neutral-400 font-bold tracking-wider mt-0.5">{variation.category}</p>
+                          <div className="mt-2 flex items-center gap-2">
+                            <span className="text-sm font-black text-teal-600">₹{variation.price.toFixed(2)}</span>
+                            {variation.discPrice > 0 && (
+                              <span className="text-[10px] text-neutral-400 line-through">₹{variation.price.toFixed(2)}</span>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    </td>
-                    <td className="p-4 align-middle border border-neutral-200">
-                      {variation.variationId}
-                    </td>
-                    <td className="p-4 align-middle border border-neutral-200">
-                      <div className="flex flex-col gap-1">
-                        <span>{variation.productName}</span>
-                      </div>
-                    </td>
-                    <td className="p-4 align-middle border border-neutral-200">
-                      {variation.sellerName}
-                    </td>
-                    <td className="p-4 border border-neutral-200">
-                      <div className="w-16 h-12 bg-white border border-neutral-200 rounded p-1 flex items-center justify-center mx-auto">
-                        <img
-                          src={variation.productImage}
-                          alt={variation.productName}
-                          className="max-w-full max-h-full object-contain"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src =
-                              "https://placehold.co/60x40?text=Img";
-                          }}
-                        />
-                      </div>
-                    </td>
-                    <td className="p-4 align-middle border border-neutral-200">
-                      {variation.brandName || "-"}
-                    </td>
-                    <td className="p-4 align-middle border border-neutral-200">
-                      {variation.category}
-                    </td>
-                    <td className="p-4 align-middle border border-neutral-200">
-                      {variation.subCategory}
-                    </td>
-                    <td className="p-4 align-middle border border-neutral-200">
-                      ₹{variation.price.toFixed(2)}
-                    </td>
-                    <td className="p-4 align-middle border border-neutral-200">
-                      {variation.discPrice > 0
-                        ? `₹${variation.discPrice.toFixed(2)}`
-                        : "-"}
-                    </td>
-                    <td className="p-4 align-middle border border-neutral-200">
-                      {variation.variation}
-                    </td>
-                    <td className="p-4 align-middle border border-neutral-200">
-                      <div className="flex items-center justify-center gap-2">
+                      <div className="flex border-t border-neutral-100 bg-neutral-50/50">
                         <button
                           onClick={() => handleEdit(variation.productId)}
-                          className="p-1.5 text-blue-600 hover:bg-blue-50 rounded transition-colors"
-                          title="Edit Product">
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                          </svg>
+                          className="flex-1 py-2.5 flex items-center justify-center gap-2 text-teal-600 hover:bg-teal-50 transition-colors border-r border-neutral-100"
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+                          <span className="text-xs font-black tracking-widest">Edit</span>
                         </button>
                         <button
                           onClick={() => handleDelete(variation.productId)}
-                          className="p-1.5 text-red-600 hover:bg-red-50 rounded transition-colors"
-                          title="Delete Product">
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round">
-                            <polyline points="3 6 5 6 21 6"></polyline>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                          </svg>
+                          className="flex-1 py-2.5 flex items-center justify-center gap-2 text-red-600 hover:bg-red-50 transition-colors"
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /></svg>
+                          <span className="text-xs font-black tracking-widest">Delete</span>
                         </button>
                       </div>
-                    </td>
-                  </tr>
-                );
-              })}
-              {displayedVariations.length === 0 && (
-                <tr>
-                  <td
-                    colSpan={12}
-                    className="p-8 text-center text-neutral-400 border border-neutral-200">
-                    No products found.
-                  </td>
-                </tr>
+                    </div>
+                  ))}
+                </div>
               )}
-            </tbody>
-          </table>
-        </div>
-        )}
+            </div>
 
-        {/* Pagination Footer */}
-        {!loading && !error && (
-        <div className="px-4 sm:px-6 py-3 border-t border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
-          <div className="text-xs sm:text-sm text-neutral-700">
-            Showing {startIndex + 1} to {endIndex} of{" "}
-            {useServerPagination && paginationInfo
-              ? paginationInfo.total
-              : filteredVariations.length}{" "}
-            entries
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-              disabled={currentPage === 1}
-              className={`p-2 border border-teal-600 rounded ${
-                currentPage === 1
-                  ? "text-neutral-400 cursor-not-allowed bg-neutral-50"
-                  : "text-teal-600 hover:bg-teal-50"
-              }`}
-              aria-label="Previous page">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15 18L9 12L15 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            {Array.from({ length: displayTotalPages }, (_, i) => i + 1).map(
-              (page) => (
+            {/* Pagination Footer */}
+            <div className="px-4 sm:px-6 py-4 border-t border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-xs font-bold text-neutral-400 tracking-widest">
+                Showing {startIndex + 1}-{endIndex} of {useServerPagination && paginationInfo ? paginationInfo.total : filteredVariations.length} items
+              </div>
+              <div className="flex items-center gap-2">
                 <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-1.5 border border-teal-600 rounded font-medium text-sm ${
-                    currentPage === page
-                      ? "bg-teal-600 text-white"
-                      : "text-teal-600 hover:bg-teal-50"
-                  }`}>
-                  {page}
+                  onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  className="p-2 border border-neutral-200 rounded-lg disabled:opacity-30 active:scale-95 transition-all bg-white"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
                 </button>
-              )
-            )}
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(displayTotalPages, prev + 1))
-              }
-              disabled={currentPage === displayTotalPages}
-              className={`p-2 border border-teal-600 rounded ${
-                currentPage === displayTotalPages
-                  ? "text-neutral-400 cursor-not-allowed bg-neutral-50"
-                  : "text-teal-600 hover:bg-teal-50"
-              }`}
-              aria-label="Next page">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M9 18L15 12L9 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: Math.min(5, displayTotalPages) }, (_, i) => {
+                    const pageNum = i + 1;
+                    return (
+                      <button
+                        key={pageNum}
+                        onClick={() => setCurrentPage(pageNum)}
+                        className={`w-9 h-9 flex items-center justify-center rounded-lg text-xs font-black transition-all ${currentPage === pageNum ? "bg-teal-600 text-white shadow-lg shadow-teal-100" : "bg-white text-neutral-600 border border-neutral-200"}`}
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  })}
+                  {displayTotalPages > 5 && <span className="text-neutral-400 font-black px-1">...</span>}
+                </div>
+                <button
+                  onClick={() => setCurrentPage((prev) => Math.min(displayTotalPages, prev + 1))}
+                  disabled={currentPage === displayTotalPages}
+                  className="p-2 border border-neutral-200 rounded-lg disabled:opacity-30 active:scale-95 transition-all bg-white"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
         )}
       </div>
     </div>

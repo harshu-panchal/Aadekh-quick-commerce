@@ -96,7 +96,7 @@ export default function SellerSalesReport() {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <h1 className="text-2xl font-semibold text-neutral-900">Sales Report</h1>
                     <div className="flex items-center gap-2 text-sm">
-                        <Link to="/seller" className="text-blue-600 hover:text-blue-700">
+                        <Link to="/seller" className="text-teal-600 hover:text-teal-700">
                             Home
                         </Link>
                         <span className="text-neutral-400">/</span>
@@ -196,7 +196,7 @@ export default function SellerSalesReport() {
                                     link.click();
                                     document.body.removeChild(link);
                                 }}
-                                className="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded text-sm font-medium flex items-center gap-1 transition-colors"
+                                className="bg-teal-600 hover:bg-teal-700 text-white px-3 py-1.5 rounded text-sm font-medium flex items-center gap-1 transition-colors"
                             >
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -305,7 +305,7 @@ export default function SellerSalesReport() {
                                         reports.map((report, index) => (
                                             <tr key={index} className="hover:bg-neutral-50">
                                                 <td className="p-4 border border-neutral-200 text-sm">
-                                                    <span className="text-blue-600 hover:text-blue-700 font-medium">
+                                                    <span className="text-teal-600 hover:text-teal-700 font-medium">
                                                         {report.orderId}
                                                     </span>
                                                 </td>

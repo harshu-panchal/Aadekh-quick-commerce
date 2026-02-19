@@ -258,20 +258,18 @@ export default function SellerDashboard() {
           <p className="text-sm text-gray-500">Overview of your store performance</p>
         </div>
         <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
-          <span className={`text-sm font-medium ${isShopOpen ? 'text-green-600' : 'text-red-500'}`}>
+          <span className={`text-sm font-medium ${isShopOpen ? 'text-teal-600' : 'text-red-500'}`}>
             {isShopOpen ? 'Shop is Live' : 'Shop is Closed'}
           </span>
           <button
             onClick={handleToggleShop}
             disabled={statusLoading}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 ${
-              isShopOpen ? 'bg-teal-600' : 'bg-gray-200'
-            } ${statusLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 ${isShopOpen ? 'bg-teal-600' : 'bg-gray-200'
+              } ${statusLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
           >
             <span
-              className={`${
-                isShopOpen ? 'translate-x-6' : 'translate-x-1'
-              } inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ease-in-out`}
+              className={`${isShopOpen ? 'translate-x-6' : 'translate-x-1'
+                } inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ease-in-out`}
             />
           </button>
         </div>
@@ -283,7 +281,7 @@ export default function SellerDashboard() {
         <DashboardCard icon={subcategoryIcon} title="Total Subcategory" value={stats.totalSubcategory} accentColor="#ec4899" />
         <DashboardCard icon={productIcon} title="Total Product" value={stats.totalProduct} accentColor="#f97316" />
         <DashboardCard icon={ordersIcon} title="Total Orders" value={stats.totalOrders} accentColor="#3b82f6" />
-        <DashboardCard icon={completedOrdersIcon} title="Completed Orders" value={stats.completedOrders} accentColor="#16a34a" />
+        <DashboardCard icon={completedOrdersIcon} title="Completed Orders" value={stats.completedOrders} accentColor="#0d9488" />
         <DashboardCard icon={pendingOrdersIcon} title="Pending Orders" value={stats.pendingOrders} accentColor="#a855f7" />
         <DashboardCard icon={cancelledOrdersIcon} title="Cancelled Orders" value={stats.cancelledOrders} accentColor="#ef4444" />
       </div>
@@ -328,15 +326,15 @@ export default function SellerDashboard() {
           </div>
         </div>
 
-        {/* Table */}
-        <div className="overflow-x-auto">
+        {/* Table & Cards */}
+        <div className="hidden sm:block overflow-x-auto">
           <table className="w-full min-w-[600px]">
             <thead className="bg-neutral-50 border-b border-neutral-200">
               <tr>
-                <th className="px-4 sm:px-6 py-3 text-left text-xs font-semibold text-neutral-700 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-semibold text-neutral-700 tracking-wider">
                   ID
                 </th>
-                <th className="px-4 sm:px-6 py-3 text-left text-xs font-semibold text-neutral-700 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-semibold text-neutral-700 tracking-wider">
                   <div className="flex items-center gap-2">
                     O. Date
                     <svg
@@ -357,7 +355,7 @@ export default function SellerDashboard() {
                     </svg>
                   </div>
                 </th>
-                <th className="px-4 sm:px-6 py-3 text-left text-xs font-semibold text-neutral-700 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-semibold text-neutral-700 tracking-wider">
                   <div className="flex items-center gap-2">
                     Status
                     <svg
@@ -378,7 +376,7 @@ export default function SellerDashboard() {
                     </svg>
                   </div>
                 </th>
-                <th className="px-4 sm:px-6 py-3 text-left text-xs font-semibold text-neutral-700 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-semibold text-neutral-700 tracking-wider">
                   <div className="flex items-center gap-2">
                     Amount
                     <svg
@@ -399,7 +397,7 @@ export default function SellerDashboard() {
                     </svg>
                   </div>
                 </th>
-                <th className="px-4 sm:px-6 py-3 text-left text-xs font-semibold text-neutral-700 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-semibold text-neutral-700 tracking-wider">
                   <div className="flex items-center gap-2">
                     Action
                     <svg
@@ -471,61 +469,59 @@ export default function SellerDashboard() {
           </table>
         </div>
 
+        {/* Mobile Card View */}
+        <div className="sm:hidden divide-y divide-neutral-100">
+          {displayedOrders.map((order) => (
+            <div key={order.id} className="p-4 bg-white hover:bg-neutral-50 transition-colors" onClick={() => navigate(`/seller/orders/${order.id}`)}>
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <span className="text-xs font-bold text-teal-600">ID: {order.id}</span>
+                  <p className="text-xs text-neutral-500">{order.orderDate}</p>
+                </div>
+                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider ${getStatusBadgeClass(order.status)}`}>
+                  {order.status}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-lg font-bold text-neutral-900">₹ {order.amount}</span>
+                <button
+                  className="text-teal-600 text-sm font-semibold flex items-center gap-1"
+                >
+                  Details
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Pagination Footer */}
         <div className="px-4 sm:px-6 py-3 border-t border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
           <div className="text-xs sm:text-sm text-neutral-700">
             Showing {startIndex + 1} to {Math.min(endIndex, newOrders.length)} of {newOrders.length} entries
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4 sm:gap-2">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className={`p-2 border border-neutral-300 rounded ${currentPage === 1
+              className={`flex items-center gap-1 px-3 py-1.5 border border-neutral-300 rounded-lg text-sm transition-all ${currentPage === 1
                 ? 'text-neutral-400 cursor-not-allowed bg-neutral-50'
-                : 'text-neutral-700 hover:bg-neutral-50'
+                : 'text-neutral-700 hover:bg-neutral-50 active:scale-95'
                 }`}
-              aria-label="Previous page"
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15 18L9 12L15 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+              <span>Prev</span>
             </button>
             <button
               onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className={`p-2 border border-neutral-300 rounded ${currentPage === totalPages
+              className={`flex items-center gap-1 px-3 py-1.5 border border-neutral-300 rounded-lg text-sm transition-all ${currentPage === totalPages
                 ? 'text-neutral-400 cursor-not-allowed bg-neutral-50'
-                : 'text-neutral-700 hover:bg-neutral-50'
+                : 'text-neutral-700 hover:bg-neutral-50 active:scale-95'
                 }`}
-              aria-label="Next page"
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M9 18L15 12L9 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <span>Next</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
             </button>
           </div>
         </div>

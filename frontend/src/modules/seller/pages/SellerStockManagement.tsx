@@ -203,7 +203,7 @@ export default function SellerStockManagement() {
             {/* Page Header */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-semibold text-neutral-800">Stock Management</h1>
-                <div className="text-sm text-blue-500">
+                <div className="text-sm text-teal-600">
                     <span className="cursor-pointer hover:underline">Home</span> <span className="text-neutral-400">/</span> <span className="text-neutral-600">Dashboard</span>
                 </div>
             </div>
@@ -405,7 +405,7 @@ export default function SellerStockManagement() {
                                         <div className="flex items-center gap-2">
                                             <span className={`px-2 py-1 rounded-full text-xs font-medium ${item.stock === 0
                                                 ? 'bg-red-50 text-red-600'
-                                                : 'bg-green-50 text-green-600'
+                                                : 'bg-teal-50 text-teal-600'
                                                 }`}>
                                                 {item.stock}
                                             </span>

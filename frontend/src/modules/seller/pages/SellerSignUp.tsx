@@ -232,7 +232,7 @@ export default function SellerSignUp() {
   return (
     <div className="min-h-screen relative flex flex-col items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-[#0f2e20] via-[#1a4a33] to-[#0c831f]">
       {/* Decorative Background Elements */}
-      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-green-500/20 blur-[100px] animate-pulse" />
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-teal-500/20 blur-[100px] animate-pulse" />
       <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-teal-400/20 blur-[120px] animate-pulse delay-700" />
       <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] rounded-full bg-emerald-400/10 blur-[80px]" />
 
@@ -396,7 +396,7 @@ export default function SellerSignUp() {
                               checked={checked}
                               onChange={() => toggleCategory(cat.name)}
                               disabled={loading}
-                              className="h-4 w-4 text-green-500 border-white/30 rounded focus:ring-green-500 bg-black/30"
+                              className="h-4 w-4 text-teal-600 border-white/30 rounded focus:ring-teal-500 bg-black/30"
                             />
                             <span>{cat.name}</span>
                           </label>
@@ -668,7 +668,7 @@ export default function SellerSignUp() {
                 type="submit"
                 disabled={loading}
                 className={`w-full py-3 rounded-xl font-bold text-sm tracking-wide transition-all shadow-lg overflow-hidden relative group ${!loading
-                  ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:shadow-green-500/40 hover:scale-[1.02] active:scale-[0.98]"
+                  ? "bg-gradient-to-r from-teal-500 to-emerald-600 text-white hover:shadow-teal-500/40 hover:scale-[1.02] active:scale-[0.98]"
                   : "bg-white/10 text-white/30 cursor-not-allowed border border-white/5"
                   }`}>
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none" />
@@ -750,7 +750,7 @@ export default function SellerSignUp() {
                     }
                   }}
                   disabled={loading}
-                  className="py-2.5 rounded-lg text-xs font-semibold text-green-400 hover:text-green-300 hover:bg-green-500/10 border border-green-500/20 transition-all active:scale-95">
+                  className="py-2.5 rounded-lg text-xs font-semibold text-teal-400 hover:text-teal-300 hover:bg-teal-500/10 border border-teal-500/20 transition-all active:scale-95">
                   {loading ? "Sending..." : "Resend OTP"}
                 </button>
               </div>

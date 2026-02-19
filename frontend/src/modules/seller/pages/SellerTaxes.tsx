@@ -179,7 +179,7 @@ export default function SellerTaxes() {
                                     <td className="p-4 align-middle border border-neutral-200">{tax.percentage}%</td>
                                     <td className="p-4 align-middle border border-neutral-200">
                                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${tax.status === 'Active'
-                                            ? 'bg-emerald-100 text-emerald-800'
+                                            ? 'bg-teal-100 text-teal-800'
                                             : 'bg-rose-100 text-rose-800'
                                             }`}>
                                             {tax.status}

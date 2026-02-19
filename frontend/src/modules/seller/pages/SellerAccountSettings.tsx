@@ -254,7 +254,7 @@ const SellerAccountSettings = () => {
             {/* Status Card */}
             <div className="mt-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-5 text-white shadow-lg">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-semibold uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded">
+                <span className="text-xs font-semibold tracking-wider bg-white/20 px-2 py-0.5 rounded">
                   Account Status
                 </span>
               </div>
@@ -264,7 +264,7 @@ const SellerAccountSettings = () => {
                 </div>
                 <div>
                   <p className="font-medium">{sellerData.sellerName}</p>
-                  <p className="text-xs text-indigo-100 uppercase">{sellerData.status || 'Active'}</p>
+                  <p className="text-xs text-indigo-100">{sellerData.status || 'Active'}</p>
                 </div>
               </div>
             </div>
@@ -309,7 +309,7 @@ const SellerAccountSettings = () => {
                             />
                             {isEditing && (
                               <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-200 backdrop-blur-sm z-10">
-                                <span className="text-white text-xs font-bold uppercase tracking-wider flex flex-col items-center gap-1">
+                                <span className="text-white text-xs font-bold tracking-wider flex flex-col items-center gap-1">
                                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                                   Change
                                 </span>
@@ -358,14 +358,14 @@ const SellerAccountSettings = () => {
                             </div>
                             {isEditing && (
                               <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl cursor-pointer opacity-0 group-hover:opacity-100 transition-all duration-200 backdrop-blur-sm">
-                                <span className="text-white text-xs font-bold">UPLOAD</span>
+                                <span className="text-white text-xs font-bold">Upload</span>
                               </div>
                             )}
                           </div>
                           <div>
                             <h3 className="text-xl font-bold text-gray-900">{sellerData.storeName || 'Store Name'}</h3>
                             <div className="flex items-center gap-2 mt-1">
-                              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-teal-100 text-teal-700 uppercase tracking-wide">
+                              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-teal-100 text-teal-700 tracking-wide">
                                 {sellerData.category || 'Category'}
                               </span>
                             </div>
@@ -418,25 +418,25 @@ const SellerAccountSettings = () => {
                                   disabled={!isEditing}
                                   required
                                 />
-                                  <div className="mt-4 animate-fadeIn">
-                                    <p className="text-sm font-medium text-neutral-700 mb-2">
-                                      Exact Location <span className="text-teal-600 text-xs font-normal">(Move the map to place the pin on your store's entrance)</span>
-                                    </p>
-                                    <LocationPickerMap
-                                      initialLat={parseFloat(sellerData.latitude) || 26.9124}
-                                      initialLng={parseFloat(sellerData.longitude) || 75.7873}
-                                      onLocationSelect={(lat, lng) => {
-                                        setSellerData(prev => ({
-                                          ...prev,
-                                          latitude: lat.toString(),
-                                          longitude: lng.toString()
-                                        }));
-                                      }}
-                                    />
-                                    <p className="mt-1 text-xs text-neutral-500 text-center">
-                                      Selected Coordinates: {sellerData.latitude || 'Not selected'}, {sellerData.longitude || 'Not selected'}
-                                    </p>
-                                  </div>
+                                <div className="mt-4 animate-fadeIn">
+                                  <p className="text-sm font-medium text-neutral-700 mb-2">
+                                    Exact Location <span className="text-teal-600 text-xs font-normal">(Move the map to place the pin on your store's entrance)</span>
+                                  </p>
+                                  <LocationPickerMap
+                                    initialLat={parseFloat(sellerData.latitude) || 26.9124}
+                                    initialLng={parseFloat(sellerData.longitude) || 75.7873}
+                                    onLocationSelect={(lat, lng) => {
+                                      setSellerData(prev => ({
+                                        ...prev,
+                                        latitude: lat.toString(),
+                                        longitude: lng.toString()
+                                      }));
+                                    }}
+                                  />
+                                  <p className="mt-1 text-xs text-neutral-500 text-center">
+                                    Selected Coordinates: {sellerData.latitude || 'Not selected'}, {sellerData.longitude || 'Not selected'}
+                                  </p>
+                                </div>
                               </>
                             ) : (
                               <textarea
