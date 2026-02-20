@@ -1,3 +1,5 @@
+import { Request, Response } from 'express';
+import { asyncHandler } from '../../../utils/asyncHandler';
 import { getCommissionSummary, processPendingCODPayouts } from '../../../services/commissionService';
 import Delivery from '../../../models/Delivery';
 import { createRazorpayOrder, verifyPaymentSignature } from '../../../services/paymentService';
@@ -14,7 +16,7 @@ import {
 /**
  * Get delivery boy wallet balance
  */
-export const getBalance = async (req: Request, res: Response) => {
+export const getBalance = asyncHandler(async (req: Request, res: Response) => {
     try {
         const deliveryBoyId = req.user!.userId;
         const balance = await getWalletBalance(deliveryBoyId, 'DELIVERY_BOY');
@@ -35,12 +37,12 @@ export const getBalance = async (req: Request, res: Response) => {
             message: error.message || 'Failed to get wallet balance',
         });
     }
-};
+});
 
 /**
  * Get delivery boy wallet transactions
  */
-export const getTransactions = async (req: Request, res: Response) => {
+export const getTransactions = asyncHandler(async (req: Request, res: Response) => {
     try {
         const deliveryBoyId = req.user!.userId;
         const { page = 1, limit = 20 } = req.query;
@@ -64,12 +66,12 @@ export const getTransactions = async (req: Request, res: Response) => {
             message: error.message || 'Failed to get wallet transactions',
         });
     }
-};
+});
 
 /**
  * Request withdrawal
  */
-export const requestWithdrawal = async (req: Request, res: Response) => {
+export const requestWithdrawal = asyncHandler(async (req: Request, res: Response) => {
     try {
         const deliveryBoyId = req.user!.userId;
         const { amount, paymentMethod } = req.body;
@@ -107,12 +109,12 @@ export const requestWithdrawal = async (req: Request, res: Response) => {
             message: error.message || 'Failed to request withdrawal',
         });
     }
-};
+});
 
 /**
  * Get delivery boy withdrawal requests
  */
-export const getWithdrawals = async (req: Request, res: Response) => {
+export const getWithdrawals = asyncHandler(async (req: Request, res: Response) => {
     try {
         const deliveryBoyId = req.user!.userId;
         const { status } = req.query;
@@ -135,12 +137,12 @@ export const getWithdrawals = async (req: Request, res: Response) => {
             message: error.message || 'Failed to get withdrawal requests',
         });
     }
-};
+});
 
 /**
  * Get delivery boy commission earnings
  */
-export const getCommissions = async (req: Request, res: Response) => {
+export const getCommissions = asyncHandler(async (req: Request, res: Response) => {
     try {
         const deliveryBoyId = req.user!.userId;
 
@@ -158,12 +160,12 @@ export const getCommissions = async (req: Request, res: Response) => {
             message: error.message || 'Failed to get commission earnings',
         });
     }
-};
+});
 
 /**
  * Create Admin Payout Order (Razorpay)
  */
-export const createAdminPayoutOrder = async (req: Request, res: Response) => {
+export const createAdminPayoutOrder = asyncHandler(async (req: Request, res: Response) => {
     try {
         const deliveryBoyId = req.user!.userId;
         const { amount } = req.body;
@@ -197,12 +199,12 @@ export const createAdminPayoutOrder = async (req: Request, res: Response) => {
         console.error("Error creating admin payout order:", error);
         return res.status(500).json({ success: false, message: error.message });
     }
-};
+});
 
 /**
  * Verify Admin Payout (Razorpay)
  */
-export const verifyAdminPayout = async (req: Request, res: Response) => {
+export const verifyAdminPayout = asyncHandler(async (req: Request, res: Response) => {
     const session = await mongoose.startSession();
     session.startTransaction();
 
@@ -277,4 +279,4 @@ export const verifyAdminPayout = async (req: Request, res: Response) => {
     } finally {
         session.endSession();
     }
-};
+});

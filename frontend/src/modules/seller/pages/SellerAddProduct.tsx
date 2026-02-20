@@ -943,7 +943,7 @@ export default function SellerAddProduct() {
                   {variations.map((variation, index) => (
                     <div key={index} className="flex items-center gap-3 p-3 bg-white border border-neutral-200 rounded-xl shadow-sm group">
                       <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 font-black text-xs">
-                        {variation.title.substring(0, 2).toUpperCase()}
+                        {(variation.title || "").substring(0, 2).toUpperCase()}
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-black text-neutral-800 text-sm truncate">{variation.title || "No Title"}</h4>
