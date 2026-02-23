@@ -641,16 +641,20 @@ export const getHomeContent = async (req: Request, res: Response) => {
             ? banners
             : [
               {
-                id: 1,
-                image:
-                  "https://img.freepik.com/free-vector/horizontal-banner-template-grocery-sales_23-2149432421.jpg",
-                link: "/category/grocery",
+                _id: "fallback-1",
+                title: "Fresh Groceries @ Low Prices",
+                image: "https://img.freepik.com/free-vector/flat-supermarket-social-media-cover-template_23-2149363385.jpg",
+                link: "/category/all",
+                order: 1,
+                isActive: true
               },
               {
-                id: 2,
-                image:
-                  "https://img.freepik.com/free-vector/flat-supermarket-social-media-cover-template_23-2149363385.jpg",
-                link: "/category/snacks",
+                _id: "fallback-2",
+                title: "Daily Essentials Delivered",
+                image: "https://img.freepik.com/free-vector/horizontal-banner-template-grocery-sales_23-2149432421.jpg",
+                link: "/category/all",
+                order: 2,
+                isActive: true
               },
             ],
         trending,
